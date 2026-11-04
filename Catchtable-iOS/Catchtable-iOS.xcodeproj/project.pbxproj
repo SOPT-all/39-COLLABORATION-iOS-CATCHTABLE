@@ -74,6 +74,9 @@
 			);
 			buildRules = (
 			);
+			dependencies = (
+				9431F356309B4D7B0002CF5E /* PBXTargetDependency */,
+			);
 			fileSystemSynchronizedGroups = (
 				9431EFB0309B0E980002CF5E /* Catchtable-iOS */,
 			);
@@ -111,6 +114,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				9431EFE7309B12820002CF5E /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				9431F354309B4D5A0002CF5E /* XCRemoteSwiftPackageReference "SwiftLintPlugins" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 9431EFAF309B0E980002CF5E /* Products */;
@@ -137,6 +141,13 @@
 			);
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		9431F356309B4D7B0002CF5E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			productRef = 9431F355309B4D7B0002CF5E /* SwiftLintBuildToolPlugin */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		9431EFB7309B0E980002CF5E /* Debug configuration for PBXProject "Catchtable-iOS" */ = {
@@ -354,6 +365,14 @@
 				minimumVersion = 8.15.0;
 			};
 		};
+		9431F354309B4D5A0002CF5E /* XCRemoteSwiftPackageReference "SwiftLintPlugins" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SimplyDanny/SwiftLintPlugins";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.65.1;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -361,6 +380,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 9431EFE7309B12820002CF5E /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = Kingfisher;
+		};
+		9431F355309B4D7B0002CF5E /* SwiftLintBuildToolPlugin */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9431F354309B4D5A0002CF5E /* XCRemoteSwiftPackageReference "SwiftLintPlugins" */;
+			productName = "plugin:SwiftLintBuildToolPlugin";
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
