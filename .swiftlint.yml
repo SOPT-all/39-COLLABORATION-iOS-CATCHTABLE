@@ -1,0 +1,55 @@
+included:
+  - Catchtable-iOS
+
+only_rules:
+  - sorted_imports
+  - type_name
+  - identifier_name
+  - line_length
+  - multiline_parameters
+  - multiline_arguments
+  - trailing_whitespace
+  - vertical_whitespace
+  - vertical_whitespace_opening_braces
+  - vertical_whitespace_closing_braces
+  - private_swiftui_state
+  - force_unwrapping
+  - force_cast
+  - custom_rules
+
+line_length:
+  warning: 100
+  ignores_urls: true
+
+identifier_name:
+  min_length: 2
+  excluded:
+    - id
+    - x
+    - y
+
+type_name:
+  min_length: 3
+  max_length: 50
+
+vertical_whitespace:
+  max_empty_lines: 1
+
+custom_rules:
+  no_preview:
+    name: "No Preview"
+    regex: "#Preview"
+    message: "#Preview는 확인용으로만 쓰고 git에 올릴 때는 지워 주세요."
+    severity: warning
+
+  no_system_font:
+    name: "No System Font"
+    regex: "\\.font\\(\\.system\\("
+    message: "폰트는 Typography를 사용해 주세요."
+    severity: warning
+
+  no_hardcoded_color:
+    name: "No Hardcoded Color"
+    regex: "Color\\((red|white|hue):"
+    message: "색은 에셋 컬러를 사용해 주세요."
+    severity: warning
