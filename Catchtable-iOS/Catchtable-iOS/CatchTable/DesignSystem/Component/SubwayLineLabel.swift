@@ -82,12 +82,3 @@ struct SubwayLineLabel: View {
             .clipShape(line.isLineNameNumber ? AnyShape(Circle()) : AnyShape(RoundedRectangle(cornerRadius: 16)))
     }
 }
-
-#Preview {
-    HStack(spacing: 4) {
-            ForEach(Line.allCases, id: \.self) { line in
-                SubwayLineLabel(line: line)
-            }
-        }
-}
-
