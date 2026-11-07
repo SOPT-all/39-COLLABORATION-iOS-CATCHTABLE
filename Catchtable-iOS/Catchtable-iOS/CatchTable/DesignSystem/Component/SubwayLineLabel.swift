@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-enum Line: CaseIterable {
+enum Line {
     case line1
     case line2
     case line3
