@@ -33,7 +33,7 @@ private struct CatchTableButtonStyle: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
             .typography(.h1Sb16)
-            .foregroundStyle(foregroundColor)
+            .foregroundStyle(foregroundColor(isPressed: configuration.isPressed))
             .frame(maxWidth: .infinity)
             .padding(.vertical, 12)
             .background(
@@ -48,10 +48,10 @@ private struct CatchTableButtonStyle: ButtonStyle {
             }
     }
 
-    private var foregroundColor: Color {
+    private func foregroundColor(isPressed: Bool) -> Color {
         guard isEnabled else { return .gray300 }
         switch variant {
-        case .filled: return .white
+        case .filled: return isPressed ? .gray100 : .white
         case .outlined: return .gray900
         }
     }
