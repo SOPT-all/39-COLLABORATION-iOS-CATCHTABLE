@@ -1,15 +1,12 @@
 {
-  "images" : [
+  "images": [
     {
-      "filename" : "img_area_gangnam_yeoksam.svg",
-      "idiom" : "universal"
+      "filename": "img_area_gangnam_yeoksam.png",
+      "idiom": "universal"
     }
   ],
-  "info" : {
-    "author" : "xcode",
-    "version" : 1
-  },
-  "properties" : {
-    "preserves-vector-representation" : true
+  "info": {
+    "author": "xcode",
+    "version": 1
   }
 }

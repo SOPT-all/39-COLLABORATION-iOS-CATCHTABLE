@@ -1,15 +1,12 @@
 {
-  "images" : [
+  "images": [
     {
-      "filename" : "img_area_yongsan.svg",
-      "idiom" : "universal"
+      "filename": "img_area_yongsan.png",
+      "idiom": "universal"
     }
   ],
-  "info" : {
-    "author" : "xcode",
-    "version" : 1
-  },
-  "properties" : {
-    "preserves-vector-representation" : true
+  "info": {
+    "author": "xcode",
+    "version": 1
   }
 }
