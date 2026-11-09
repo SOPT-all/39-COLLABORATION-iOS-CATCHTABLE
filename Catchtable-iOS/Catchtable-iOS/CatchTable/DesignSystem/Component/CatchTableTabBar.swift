@@ -67,8 +67,7 @@ struct CatchTableTabBar: View {
             }
             .padding(.horizontal, 22)
             .padding(.top, 8)
-            .padding(.bottom, 24)
-            .background(.white)
+            .background(.white, ignoresSafeAreaEdges: .bottom)
         }
     }
     
@@ -87,7 +86,12 @@ struct CatchTableTabBar: View {
                     .typography(.captionMd10)
             }
             .foregroundStyle(.gray900)
+            .frame(maxWidth: .infinity)
+            .contentShape(Rectangle())
         }
-        .frame(maxWidth: .infinity)
     }
+}
+
+#Preview {
+    CatchTableTabBar()
 }
