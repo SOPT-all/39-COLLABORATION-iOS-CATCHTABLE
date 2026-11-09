@@ -1,5 +1,5 @@
 //
-//  SearchHeader.swift
+//  HomeHeader.swift
 //  Catchtable-iOS
 //
 //  Created by dayeon on 11/9/26.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct SearchHeader: View {
+struct HomeHeader: View {
     @State private var searchText: String = "";
     
     var body: some View {
@@ -57,8 +57,4 @@ struct SearchHeader: View {
         }
         .padding(.horizontal, 20)
     }
-}
-
-#Preview {
-    SearchHeader()
 }
