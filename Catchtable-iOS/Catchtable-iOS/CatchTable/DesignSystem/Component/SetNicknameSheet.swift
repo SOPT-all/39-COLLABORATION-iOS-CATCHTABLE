@@ -15,6 +15,8 @@ enum NameType {
 struct SetNicknameSheet: View {
     @State private var nameType: NameType? = nil
     @State private var nickname: String = "우수한 셀럽_121"
+    
+    let onVote: (String) -> Void
     let maxCount: Int = 12
     private var inputCount: Int { nickname.count }
     
@@ -50,8 +52,19 @@ struct SetNicknameSheet: View {
                 nicknameField
                     .padding(.top, 10)
             }
+            
+            CatchTableButton(title: "이 이름으로 투표하기", variant: .filled) {
+                onVote(nameType == .anonymous ? "익명1" : nickname)
+            }
+            .disabled(nameType == nil || (nameType == .nickname && nickname.isEmpty))
+            .padding(.top, 36)
         }
         .padding(.horizontal, 20)
+        .fixedSize(horizontal: false, vertical: true)
+        .frame(maxHeight: .infinity, alignment: .top)
+        .presentationDetents([.height(nameType == nil ? 320 : 372)])
+        .presentationDragIndicator(.visible)
+        .presentationBackground(.white)
     }
     
     private func radioRow(title: String, isSelected: Bool, action: @escaping () -> Void) -> some View {
@@ -103,8 +116,4 @@ struct SetNicknameSheet: View {
         .background(.gray100)
         .clipShape(RoundedRectangle(cornerRadius: 12))
     }
-}
-
-#Preview {
-    SetNicknameSheet()
 }
