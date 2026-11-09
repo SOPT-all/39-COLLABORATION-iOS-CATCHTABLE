@@ -24,23 +24,23 @@ enum MainTab: Hashable, CaseIterable {
         }
     }
     
-    var selectedIcon: String {
+    var selectedIcon: ImageResource {
         switch self {
-        case .home: return "icon_nav_home_filled"
-        case .saved: return "icon_nav_saved_filled"
-        case .nearby: return "icon_nav_nearby"
-        case .dining: return "icon_nav_dining_filled"
-        case .my: return "icon_nav_account_filled"
+        case .home: return .iconNavHomeFilled
+        case .saved: return .iconNavSavedFilled
+        case .nearby: return .iconNavNearby
+        case .dining: return .iconNavDiningFilled
+        case .my: return .iconNavAccountFilled
         }
     }
     
-    var unselectedIcon: String {
+    var unselectedIcon: ImageResource {
         switch self {
-        case .home: return "icon_nav_home_outline"
-        case .saved: return "icon_nav_saved_outline"
-        case .nearby: return "icon_nav_nearby"
-        case .dining: return "icon_nav_dining_outline"
-        case .my: return "icon_nav_account_outline"
+        case .home: return .iconNavHomeOutline
+        case .saved: return .iconNavSavedOutline
+        case .nearby: return .iconNavNearby
+        case .dining: return .iconNavDiningOutline
+        case .my: return .iconNavAccountOutline
         }
     }
 }
@@ -51,9 +51,7 @@ struct CatchTableTabBar: View {
     var body: some View {
         ZStack(alignment: .bottom) {
             TabView(selection: $selectedTab) {
-                
                 // TODO: View 연동 필요
-                
                 Text("Home").tag(MainTab.home)
                 Text("Saved").tag(MainTab.saved)
                 Text("Nearby").tag(MainTab.nearby)
@@ -64,12 +62,7 @@ struct CatchTableTabBar: View {
             
             HStack(spacing: 0) {
                 ForEach(MainTab.allCases, id: \.self) { tab in
-                    tabButton(
-                        title: tab.title,
-                        selectedIcon: tab.selectedIcon,
-                        unselectedIcon: tab.unselectedIcon,
-                        tab: tab
-                    )
+                    tabButton(tab: tab)
                 }
             }
             .padding(.horizontal, 22)
@@ -80,17 +73,17 @@ struct CatchTableTabBar: View {
     }
     
     @ViewBuilder
-    private func tabButton(title: String, selectedIcon: String, unselectedIcon: String, tab: MainTab) -> some View {
+    private func tabButton(tab: MainTab) -> some View {
         Button {
             selectedTab = tab
         } label: {
             VStack(alignment: .center, spacing: 4) {
-                Image(selectedTab == tab ? selectedIcon : unselectedIcon)
+                Image(selectedTab == tab ? tab.selectedIcon : tab.unselectedIcon)
                     .renderingMode(.template)
                     .resizable()
                     .frame(width: 24, height: 24)
                 
-                Text(title)
+                Text(tab.title)
                     .typography(.captionMd10)
             }
             .foregroundStyle(.gray900)
