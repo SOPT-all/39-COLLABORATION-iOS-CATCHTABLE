@@ -46,29 +46,17 @@ enum MainTab: Hashable, CaseIterable {
 }
 
 struct CatchTableTabBar: View {
-    @State private var selectedTab: MainTab = .home
+    @Binding var selectedTab: MainTab
     
     var body: some View {
-        ZStack(alignment: .bottom) {
-            TabView(selection: $selectedTab) {
-                // TODO: View 연동 필요
-                Text("Home").tag(MainTab.home)
-                Text("Saved").tag(MainTab.saved)
-                Text("Nearby").tag(MainTab.nearby)
-                Text("Dining").tag(MainTab.dining)
-                Text("My").tag(MainTab.my)
+        HStack(spacing: 0) {
+            ForEach(MainTab.allCases, id: \.self) { tab in
+                tabButton(tab: tab)
             }
-            .toolbar(.hidden, for: .tabBar)
-            
-            HStack(spacing: 0) {
-                ForEach(MainTab.allCases, id: \.self) { tab in
-                    tabButton(tab: tab)
-                }
-            }
-            .padding(.horizontal, 22)
-            .padding(.top, 8)
-            .background(.white, ignoresSafeAreaEdges: .bottom)
         }
+        .padding(.horizontal, 22)
+        .padding(.top, 8)
+        .background(.white, ignoresSafeAreaEdges: .bottom)
     }
     
     @ViewBuilder
@@ -90,8 +78,4 @@ struct CatchTableTabBar: View {
             .contentShape(Rectangle())
         }
     }
-}
-
-#Preview {
-    CatchTableTabBar()
 }
