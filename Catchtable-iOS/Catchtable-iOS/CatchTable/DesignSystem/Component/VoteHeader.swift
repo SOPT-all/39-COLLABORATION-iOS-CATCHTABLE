@@ -52,7 +52,7 @@ private struct EndVoteButton: View {
             action()
         } label: {
             Text("투표종료")
-                .padding(.vertical, 4)
+                .padding(.vertical, 7)
                 .padding(.horizontal, 12)
                 .typography(.bodyB12)
                 .foregroundStyle(.white)
