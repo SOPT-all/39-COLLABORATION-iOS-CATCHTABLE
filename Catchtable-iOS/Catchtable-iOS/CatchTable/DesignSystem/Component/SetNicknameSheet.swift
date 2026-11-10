@@ -62,20 +62,15 @@ struct SetNicknameSheet: View {
         .padding(.horizontal, 20)
         .fixedSize(horizontal: false, vertical: true)
         .frame(maxHeight: .infinity, alignment: .top)
-        .presentationDetents([.height(nameType == nil ? 320 : 372)])
+        .presentationDetents([.height(372)])
         .presentationDragIndicator(.visible)
         .presentationBackground(.white)
     }
     
     private func radioRow(title: String, isSelected: Bool, action: @escaping () -> Void) -> some View {
         HStack(spacing: 12) {
-            Button {
-                action()
-            } label: {
-                Image(isSelected ? "btn_radio_on" : "btn_radio_off")
-                    .resizable()
-                    .frame(width: 24, height: 24)
-            }
+            CheckButton(isSelected: isSelected, action: action)
+                .animation(.easeInOut(duration: 0.2), value: isSelected)
             
             Text(title)
                 .typography(.h3Md14)
