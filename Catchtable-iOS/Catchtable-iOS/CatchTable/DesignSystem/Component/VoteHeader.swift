@@ -30,7 +30,7 @@ struct VoteHeader: View {
             Spacer()
             
             if let onEndVote {
-                EndVoteButton(action: onEndVote)
+                ChipButton(style: .endVote, action: onEndVote)
             }
             
             if let onShare {
@@ -41,24 +41,6 @@ struct VoteHeader: View {
         .foregroundStyle(.gray900)
         .frame(height: 40)
         .padding(.horizontal, 20)
-    }
-}
-
-private struct EndVoteButton: View {
-    let action: () -> Void
-    
-    var body: some View {
-        Button {
-            action()
-        } label: {
-            Text("투표종료")
-                .padding(.vertical, 7)
-                .padding(.horizontal, 12)
-                .typography(.bodyB12)
-                .foregroundStyle(.white)
-                .background(.orangeBase)
-                .clipShape(RoundedRectangle(cornerRadius: 16))
-        }
     }
 }
 
