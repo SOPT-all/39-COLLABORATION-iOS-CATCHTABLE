@@ -9,12 +9,10 @@ import SwiftUI
 
 struct HomeHeader: View {
     var body: some View {
-        HStack(alignment: .center, spacing: 0) {
+        HStack(alignment: .center, spacing: 5) {
             Image(.iconCatchtable)
                 .resizable()
                 .frame(width: 24, height: 24)
-            
-            Spacer()
             
             HStack(spacing: 10) {
                 Image(.iconSearchSm)
@@ -33,8 +31,6 @@ struct HomeHeader: View {
             .background(.gray100)
             .clipShape(RoundedRectangle(cornerRadius: 30))
             .overlay(RoundedRectangle(cornerRadius: 30).stroke(.gray200))
-            
-            Spacer()
             
             Image(.iconHistoryDefault)
                 .renderingMode(.template)
