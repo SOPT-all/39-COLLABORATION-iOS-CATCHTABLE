@@ -60,10 +60,3 @@ private struct HeaderIcon: View {
             .foregroundStyle(.gray900)
     }
 }
-
-#Preview {
-    StoreHeader(
-        onBack: { print("back") },
-        onHome: { print("home") }
-    )
-}
