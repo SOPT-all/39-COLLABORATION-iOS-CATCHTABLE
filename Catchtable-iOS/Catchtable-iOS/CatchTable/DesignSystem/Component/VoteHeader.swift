@@ -71,8 +71,9 @@ private struct ShareButton: View {
         } label: {
             Image(.iconShare24)
                 .resizable()
-                .frame(width: 30, height: 30)
-                .padding(.leading, 6)
+                .frame(width: 24, height: 24)
+                .padding(.leading, 12)
+                .padding(.trailing, 6)
         }
     }
 }
