@@ -17,7 +17,7 @@ struct SetNicknameSheet: View {
     @State private var nickname: String = "우수한 셀럽_121"
     
     let onVote: (String) -> Void
-    let maxCount: Int = 12
+    private let maxCount: Int = 12
     private var inputCount: Int { nickname.count }
     
     var body: some View {
@@ -56,7 +56,7 @@ struct SetNicknameSheet: View {
             CatchTableButton(title: "이 이름으로 투표하기", variant: .filled) {
                 onVote(nameType == .anonymous ? "익명1" : nickname)
             }
-            .disabled(nameType == nil || (nameType == .nickname && nickname.isEmpty))
+            .disabled(nickname.trimmingCharacters(in: .whitespaces).isEmpty || (nameType == .nickname && nickname.isEmpty))
             .padding(.top, 36)
         }
         .padding(.horizontal, 20)
@@ -98,9 +98,9 @@ struct SetNicknameSheet: View {
             .typography(.h3Md14)
             .foregroundStyle(.gray900)
             .tint(.orangeBase)
-            .onChange(of: nickname) { oldValue, newValue in
+            .onChange(of: nickname) { _, newValue in
                 if newValue.count > maxCount {
-                    nickname = oldValue
+                    nickname = String(newValue.prefix(maxCount))
                 }
             }
             
