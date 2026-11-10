@@ -10,6 +10,7 @@ import SwiftUI
 struct StoreHeader: View {
     var onBack: () -> Void
     var onHome: () -> Void
+    @Binding var isBookmarked: Bool
     
     var body: some View {
         HStack(alignment: .center, spacing: 0) {
@@ -22,7 +23,16 @@ struct StoreHeader: View {
             
             HStack(spacing: 16) {
                 HeaderIcon(image: .iconSearchLg)
-                HeaderIcon(image: .iconBookmark20)
+                
+                Button {
+                    isBookmarked.toggle()
+                } label: {
+                    Image(isBookmarked ? .iconBookmarkFilled20 : .iconBookmark20)
+                        .renderingMode(.template)
+                        .resizable()
+                        .foregroundStyle(isBookmarked ? .orangeBase : .gray900)
+                        .frame(width: 20, height: 20)
+                }
                 HeaderIcon(image: .iconShare20)
             }
             
