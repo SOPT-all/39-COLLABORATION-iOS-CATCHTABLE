@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct VoteHeader: View {
-    var onBack: () -> Void
+    let onBack: () -> Void
     var onEndVote: (() -> Void)? = nil
     var onShare: (() -> Void)? = nil
     

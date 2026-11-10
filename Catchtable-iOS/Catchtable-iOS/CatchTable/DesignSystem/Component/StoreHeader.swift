@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct StoreHeader: View {
-    var onBack: () -> Void
-    var onHome: () -> Void
+    let onBack: () -> Void
+    let onHome: () -> Void
     @Binding var isBookmarked: Bool
     
     var body: some View {
