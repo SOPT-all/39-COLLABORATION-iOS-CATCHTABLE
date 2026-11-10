@@ -99,6 +99,11 @@ struct SetNicknameSheet: View {
             .typography(.h3Md14)
             .foregroundStyle(.gray900)
             .tint(.orangeBase)
+            .onChange(of: nickname) { oldValue, newValue in
+                if newValue.count > maxCount {
+                    nickname = oldValue
+                }
+            }
             
             Spacer()
             
