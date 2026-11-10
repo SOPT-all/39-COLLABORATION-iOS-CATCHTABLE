@@ -70,7 +70,6 @@ struct SetNicknameSheet: View {
     private func radioRow(title: String, isSelected: Bool, action: @escaping () -> Void) -> some View {
         HStack(spacing: 12) {
             CheckButton(isSelected: isSelected, action: action)
-                .animation(.easeInOut(duration: 0.2), value: isSelected)
             
             Text(title)
                 .typography(.h3Md14)
