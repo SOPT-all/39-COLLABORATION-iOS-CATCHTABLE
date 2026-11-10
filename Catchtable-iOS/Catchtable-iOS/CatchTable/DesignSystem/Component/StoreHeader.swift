@@ -57,6 +57,7 @@ private struct HeaderButton: View {
                 .frame(width: 22, height: 22)
                 .foregroundStyle(.gray900)
         }
+        .buttonStyle(.plain)
     }
 }
 
