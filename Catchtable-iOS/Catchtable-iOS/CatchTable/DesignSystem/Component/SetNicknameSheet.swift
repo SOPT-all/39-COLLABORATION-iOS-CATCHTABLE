@@ -78,14 +78,14 @@ struct SetNicknameSheet: View {
             }
             
             Text(title)
-                .font(.system(size: 14, weight: .medium))
+                .typography(.h3Md14)
                 .foregroundStyle(.gray900)
         }
     }
     
     private var anonymousField: some View {
         Text("익명1")
-            .font(.system(size: 14, weight: .medium))
+            .typography(.h3Md14)
             .foregroundStyle(.gray900)
             .padding(12)
             .frame(maxWidth: .infinity, alignment: .leading)
@@ -101,7 +101,7 @@ struct SetNicknameSheet: View {
                 prompt: Text("닉네임을 입력해주세요.")
                     .foregroundStyle(.gray200)
             )
-            .font(.system(size: 14, weight: .medium))
+            .typography(.h3Md14)
             .foregroundStyle(.gray900)
             .tint(.orangeBase)
             
