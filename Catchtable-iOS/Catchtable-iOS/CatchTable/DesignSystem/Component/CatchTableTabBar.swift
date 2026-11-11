@@ -13,17 +13,17 @@ enum MainTab: Hashable, CaseIterable {
     case nearby
     case dining
     case my
-    
+
     var title: String {
         switch self {
         case .home: return "홈"
         case .saved: return "저장"
         case .nearby: return "내 주변"
         case .dining: return "마이다이닝"
-        case .my: return "my"
+        case .my: return "MY"
         }
     }
-    
+
     var selectedIcon: ImageResource {
         switch self {
         case .home: return .iconNavHomeFilled
@@ -33,7 +33,7 @@ enum MainTab: Hashable, CaseIterable {
         case .my: return .iconNavAccountFilled
         }
     }
-    
+
     var unselectedIcon: ImageResource {
         switch self {
         case .home: return .iconNavHomeOutline
@@ -47,34 +47,44 @@ enum MainTab: Hashable, CaseIterable {
 
 struct CatchTableTabBar: View {
     @Binding var selectedTab: MainTab
-    
+
     var body: some View {
         HStack(spacing: 0) {
             ForEach(MainTab.allCases, id: \.self) { tab in
+                if tab != MainTab.allCases.first {
+                    Spacer(minLength: 0)
+                }
+
                 tabButton(tab: tab)
             }
         }
         .padding(.horizontal, 22)
         .padding(.top, 8)
         .background(.white, ignoresSafeAreaEdges: .bottom)
+        .overlay(alignment: .top) {
+            Rectangle()
+                .fill(Color.gray200)
+                .frame(height: 1)
+        }
     }
-    
-    @ViewBuilder
+
     private func tabButton(tab: MainTab) -> some View {
-        Button {
+        let isSelected = selectedTab == tab
+
+        return Button {
             selectedTab = tab
         } label: {
             VStack(alignment: .center, spacing: 4) {
-                Image(selectedTab == tab ? tab.selectedIcon : tab.unselectedIcon)
+                Image(isSelected ? tab.selectedIcon : tab.unselectedIcon)
                     .renderingMode(.template)
                     .resizable()
                     .frame(width: 24, height: 24)
-                
+
                 Text(tab.title)
-                    .typography(.captionMd10)
+                    .typography(isSelected ? .captionB10 : .captionMd10)
             }
             .foregroundStyle(.gray900)
-            .frame(maxWidth: .infinity)
+            .frame(width: 44, height: 44)
             .contentShape(Rectangle())
         }
     }
