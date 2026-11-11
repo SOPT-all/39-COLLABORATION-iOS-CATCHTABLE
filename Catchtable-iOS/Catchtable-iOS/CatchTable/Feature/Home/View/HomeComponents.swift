@@ -164,7 +164,7 @@ struct HomeRecentStoreChip: View {
                         .foregroundStyle(.gray900)
                         .lineLimit(1)
 
-                    Text(store.info)
+                    Text(store.infoText)
                         .typography(.bodyRg12)
                         .foregroundStyle(.gray500)
                         .lineLimit(1)

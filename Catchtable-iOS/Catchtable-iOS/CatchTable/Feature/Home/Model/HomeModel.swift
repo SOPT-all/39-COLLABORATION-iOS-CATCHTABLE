@@ -74,10 +74,12 @@ struct HomeArea: Identifiable {
 
 struct HomeRecentStore: Identifiable {
     let name: String
-    let info: String
+    let area: String
+    let category: String
     let image: ImageResource
 
     var id: String { name }
+    var infoText: String { "\(area) · \(category)" }
 }
 
 struct HomeSimilarStore: Identifiable {
@@ -111,8 +113,18 @@ enum HomeMockData {
     ]
 
     static let recentStores = [
-        HomeRecentStore(name: "하이디라오 서초점", info: "강남 · 중식", image: .imgHaidilao48),
-        HomeRecentStore(name: "와아", info: "성수 · 와인", image: .imgWaa)
+        HomeRecentStore(
+            name: "하이디라오 서초점",
+            area: "강남",
+            category: "중식",
+            image: .imgHaidilao48
+        ),
+        HomeRecentStore(
+            name: "와아",
+            area: "성수",
+            category: "와인",
+            image: .imgWaa
+        )
     ]
 
     static let similarStores = [
