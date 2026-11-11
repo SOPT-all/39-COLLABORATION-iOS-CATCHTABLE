@@ -12,11 +12,13 @@ struct ChipButton: View {
         case reserveOutlined
         case viewAll
         case reserveFilled
+        case endVote
 
         var title: String {
             switch self {
             case .reserveOutlined, .reserveFilled: return "예약하기"
             case .viewAll: return "전체보기"
+            case .endVote: return "투표종료"
             }
         }
 
@@ -24,7 +26,7 @@ struct ChipButton: View {
             switch self {
             case .reserveOutlined: return .orangeBase
             case .viewAll: return .gray900
-            case .reserveFilled: return .white
+            case .reserveFilled, .endVote: return .white
             }
         }
 
@@ -32,7 +34,7 @@ struct ChipButton: View {
             switch self {
             case .reserveOutlined: return .orangeBase5
             case .viewAll: return .white
-            case .reserveFilled: return .orangeBase
+            case .reserveFilled, .endVote: return .orangeBase
             }
         }
 
@@ -40,14 +42,14 @@ struct ChipButton: View {
             switch self {
             case .reserveOutlined: return .orangeBase
             case .viewAll: return .gray300
-            case .reserveFilled: return nil
+            case .reserveFilled, .endVote: return nil
             }
         }
 
         var horizontalPadding: CGFloat {
             switch self {
             case .reserveOutlined, .viewAll: return 13
-            case .reserveFilled: return 12
+            case .reserveFilled, .endVote: return 12
             }
         }
 
@@ -55,7 +57,7 @@ struct ChipButton: View {
             switch self {
             case .reserveOutlined: return .iconVoteNextOrange
             case .viewAll: return .iconVoteNextGray
-            case .reserveFilled: return nil
+            case .reserveFilled, .endVote: return nil
             }
         }
     }
