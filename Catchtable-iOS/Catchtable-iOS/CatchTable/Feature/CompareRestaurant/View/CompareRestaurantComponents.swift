@@ -124,3 +124,51 @@ struct PriceRangeCard: View {
         }
     }
 }
+
+struct MainMenuInfoCard: View {
+    let info: MainMenuInfo
+    
+    var body: some View {
+        VStack(alignment: .center, spacing: 8) {
+            Image(info.image)
+                .resizable()
+                .scaledToFill()
+                .frame(width: 68, height: 68)
+                .clipShape(.rect(cornerRadius: 8))
+            
+            VStack(alignment: .leading, spacing: 4) {
+                Text(info.name)
+                    .typography(.bodyB12)
+                    .foregroundStyle(.gray900)
+                
+                HStack(alignment: .center, spacing: 0) {
+                    Text("\(info.price.formatted())원\(info.priceOver ? " ~" : "")")
+                        .typography(.bodyRg12)
+                        .foregroundStyle(.gray500)
+                }
+            }
+        }
+    }
+}
+
+struct MainMenuCard: View {
+    let menus: [MainMenuInfo]
+    var onTap: () -> Void
+    
+    var body: some View {
+        VStack(alignment: .leading, spacing: 6) {
+            Text("대표 메뉴")
+                .typography(.h3B14)
+                .foregroundStyle(.gray900)
+            
+            HStack(alignment: .top, spacing: 12) {
+                ForEach(menus) { menu in
+                    MainMenuInfoCard(info: menu)
+                }
+            }
+            
+            ChipButton(style: .viewAll, action: onTap)
+                .padding(.top, 10)
+        }
+    }
+}

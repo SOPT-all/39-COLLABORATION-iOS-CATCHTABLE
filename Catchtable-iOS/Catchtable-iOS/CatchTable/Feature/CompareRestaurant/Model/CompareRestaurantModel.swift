@@ -22,3 +22,11 @@ struct SubwayStation {
     let name: String
     let distance: Int
 }
+
+struct MainMenuInfo: Identifiable {
+    let id = UUID()
+    let image: ImageResource
+    let name: String
+    let price: Int
+    var priceOver: Bool = false
+}
