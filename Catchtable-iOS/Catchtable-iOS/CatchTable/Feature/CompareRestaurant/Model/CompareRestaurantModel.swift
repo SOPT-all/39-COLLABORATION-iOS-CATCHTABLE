@@ -14,6 +14,7 @@ struct VoteStore: Identifiable {
     let rating: String
     let reviewCount: String
     let summary: String
+    let priceRange: String
 }
 
 struct SubwayStation {

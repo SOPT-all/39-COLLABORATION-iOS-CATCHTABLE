@@ -108,3 +108,19 @@ struct AISummaryCard: View {
         }
     }
 }
+
+struct PriceRangeCard: View {
+    let store: VoteStore
+    
+    var body: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            Text("가격대")
+                .typography(.h3B14)
+                .foregroundStyle(.gray900)
+            
+            Text(store.priceRange)
+                .typography(.bodyRg12)
+                .foregroundStyle(.gray600)
+        }
+    }
+}
