@@ -13,6 +13,7 @@ struct VoteStore: Identifiable {
     let name: String
     let rating: String
     let reviewCount: String
+    let summary: String
 }
 
 struct SubwayStation {
