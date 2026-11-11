@@ -15,9 +15,10 @@ var pinkGradient: LinearGradient {
     )
 }
 
-struct CardVoteStore: View {
+struct VoteStoreCard: View {
     let store: VoteStore
     let isSelected: Bool
+    var onTap: () -> Void
     
     var body: some View {
         VStack(alignment: .leading, spacing: 4) {
@@ -57,6 +58,9 @@ struct CardVoteStore: View {
                         .foregroundStyle(.gray500)
                 }
             }
+            
+            ChipButton(style: .reserveOutlined, action: onTap)
+                .padding(.top, 44)
         }
     }
 }
