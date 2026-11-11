@@ -57,7 +57,7 @@ private struct CatchTableButtonStyle: ButtonStyle {
     }
 
     private func backgroundColor(isPressed: Bool) -> Color {
-        guard isEnabled else { return .gray100 }
+        guard isEnabled else { return .black4 }
         switch variant {
         case .filled: return isPressed ? .orangeBaseClicked : .orangeBase
         case .outlined: return .white
