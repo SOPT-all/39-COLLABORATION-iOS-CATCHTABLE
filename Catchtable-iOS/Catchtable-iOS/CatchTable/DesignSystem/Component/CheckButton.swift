@@ -12,22 +12,23 @@ struct CheckButton: View {
     let action: () -> Void
 
     var body: some View {
-        Button(action: action) {
-            ZStack {
-                Circle()
-                    .strokeBorder(isSelected ? Color.orangeBase : Color.gray300, lineWidth: 1)
+        ZStack {
+            Circle()
+                .strokeBorder(isSelected ? Color.orangeBase : Color.gray300, lineWidth: 1)
 
-                if isSelected {
-                    Circle()
-                        .fill(Color.orangeBase)
-                        .frame(width: 16, height: 16)
-                }
+            if isSelected {
+                Circle()
+                    .fill(Color.orangeBase)
+                    .frame(width: 16, height: 16)
             }
-            .frame(width: 22, height: 22)
-            .padding(1)
-            .contentShape(.circle)
         }
-        .buttonStyle(.plain)
+        .animation(.easeInOut(duration: 0.2), value: isSelected)
+        .geometryGroup()
+        .frame(width: 22, height: 22)
+        .padding(1)
+        .contentShape(.circle)
+        .onTapGesture(perform: action)
+        .accessibilityAddTraits(isSelected ? [.isButton, .isSelected] : .isButton)
     }
 }
 
