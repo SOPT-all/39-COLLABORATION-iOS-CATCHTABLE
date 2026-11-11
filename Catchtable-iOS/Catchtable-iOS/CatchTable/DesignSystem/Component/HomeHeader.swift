@@ -44,6 +44,7 @@ struct HomeHeader: View {
                 .frame(width: 24, height: 24)
                 .foregroundStyle(.gray900)
         }
+        .frame(height: 40)
         .padding(.horizontal, 20)
     }
 }

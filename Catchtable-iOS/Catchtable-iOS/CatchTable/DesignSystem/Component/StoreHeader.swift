@@ -38,7 +38,7 @@ struct StoreHeader: View {
             }
             
         }
-        .padding(.vertical, 8)
+        .frame(height: 40)
         .padding(.horizontal, 20)
     }
 }
