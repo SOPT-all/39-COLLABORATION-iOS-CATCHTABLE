@@ -75,10 +75,12 @@ struct SubwayLineLabel: View {
     var body: some View {
         Text(line.name)
             .typography(.captionB8)
-            .padding(.horizontal, 6)
-            .padding(.vertical, 3)
             .foregroundStyle(.white)
-            .background(line.color)
-            .clipShape(line.isLineNameNumber ? AnyShape(Circle()) : AnyShape(RoundedRectangle(cornerRadius: 16)))
+            .padding(.horizontal, line.isLineNameNumber ? 0 : 6)
+            .frame(width: line.isLineNameNumber ? 16 : nil, height: 16)
+            .background(
+                line.color,
+                in: line.isLineNameNumber ? AnyShape(.circle) : AnyShape(.capsule)
+            )
     }
 }
