@@ -118,9 +118,7 @@ struct PriceRangeCard: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
-            Text("가격대")
-                .typography(.h3B14)
-                .foregroundStyle(.gray900)
+            CardTitle(title: "가격대")
             
             Text(store.priceRange)
                 .typography(.bodyRg12)
@@ -161,9 +159,7 @@ struct MainMenuCard: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: 6) {
-            Text("대표 메뉴")
-                .typography(.h3B14)
-                .foregroundStyle(.gray900)
+            CardTitle(title: "대표 메뉴")
             
             HStack(alignment: .top, spacing: 12) {
                 ForEach(menus) { menu in
@@ -174,5 +170,33 @@ struct MainMenuCard: View {
             ChipButton(style: .viewAll, action: onTap)
                 .padding(.top, 10)
         }
+    }
+}
+
+struct CorkageCard: View {
+    let corkages: [CorkageInfo]
+    
+    var body: some View {
+        VStack(alignment: .leading, spacing: 6) {
+            CardTitle(title: "주류 및 콜키지")
+            
+            VStack(alignment: .leading, spacing: 2) {
+                ForEach(corkages) { corkage in
+                    Text("- \(corkage.type): 병당 \(corkage.price)")
+                        .typography(.bodyRg12)
+                        .foregroundStyle(.gray600)
+                }
+            }
+        }
+    }
+}
+
+struct CardTitle: View {
+    let title: String
+    
+    var body: some View {
+        Text(title)
+            .typography(.h3B14)
+            .foregroundStyle(.gray900)
     }
 }

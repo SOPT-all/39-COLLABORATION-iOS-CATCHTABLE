@@ -30,3 +30,9 @@ struct MainMenuInfo: Identifiable {
     let price: Int
     var priceOver: Bool = false
 }
+
+struct CorkageInfo: Identifiable {
+    let id = UUID()
+    let type: String
+    let price: String
+}
