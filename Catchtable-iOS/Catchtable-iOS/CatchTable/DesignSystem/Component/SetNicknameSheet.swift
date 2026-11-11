@@ -68,8 +68,15 @@ struct SetNicknameSheet: View {
         .padding(.horizontal, 20)
         .fixedSize(horizontal: false, vertical: true)
         .frame(maxHeight: .infinity, alignment: .top)
+        .overlay(alignment: .top) {
+            Capsule()
+                .fill(Color.gray200)
+                .frame(width: 50, height: 6)
+                .padding(.top, 13)
+        }
         .presentationDetents([.height(372)])
-        .presentationDragIndicator(.visible)
+        .presentationDragIndicator(.hidden)
+        .presentationCornerRadius(36)
         .presentationBackground(.white)
     }
     
