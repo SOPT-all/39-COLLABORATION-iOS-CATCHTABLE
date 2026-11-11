@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-enum RestaurantImageSource: Hashable {
+enum RestaurantImageSource {
     case asset(ImageResource)
     case remote(URL)
 }
@@ -41,7 +41,7 @@ struct RestaurantMenu: Identifiable {
     let image: RestaurantImageSource
 
     var priceText: String {
-        "\(price.formatted(.number.locale(Locale(identifier: "ko_KR"))))원"
+        "\(price.formatted(.number.locale(.korean)))원"
     }
 }
 
@@ -73,12 +73,14 @@ struct RestaurantDetail {
     let reserveTitle: String
     let isReservable: Bool
 
+    private static let tenThousand = 10_000
+
     var ratingText: String {
         String(format: "%.1f", rating)
     }
 
     var ratingCountText: String {
-        "리뷰 \(ratingCount.formatted(.number.locale(Locale(identifier: "ko_KR"))))개"
+        "리뷰 \(ratingCount.formatted(.number.locale(.korean)))개"
     }
 
     var viewerCountText: String {
@@ -86,9 +88,17 @@ struct RestaurantDetail {
     }
 
     var bookmarkCountText: String {
-        guard bookmarkCount >= 10_000 else { return "\(bookmarkCount)" }
-        return String(format: "%.1f만", Double(bookmarkCount) / 10_000)
+        guard bookmarkCount >= Self.tenThousand else {
+            return bookmarkCount.formatted(.number.locale(.korean))
+        }
+
+        let count = Double(bookmarkCount) / Double(Self.tenThousand)
+        return "\(count.formatted(.number.locale(.korean).precision(.fractionLength(0...1))))만"
     }
+}
+
+private extension Locale {
+    static let korean = Locale(identifier: "ko_KR")
 }
 
 enum RestaurantDetailMockData {
@@ -126,9 +136,24 @@ enum RestaurantDetailMockData {
             RestaurantAmenity(title: "무선 인터넷")
         ],
         menus: [
-            RestaurantMenu(id: 1, name: "루로우판", price: 4_500, image: .asset(.imgMenu1)),
-            RestaurantMenu(id: 2, name: "탄탄면", price: 5_000, image: .asset(.imgMenu2)),
-            RestaurantMenu(id: 3, name: "돼지고기튀김", price: 5_900, image: .asset(.imgMenu3))
+            RestaurantMenu(
+                id: 1,
+                name: "루로우판",
+                price: 4_500,
+                image: .asset(.imgMenu1)
+            ),
+            RestaurantMenu(
+                id: 2,
+                name: "탄탄면",
+                price: 5_000,
+                image: .asset(.imgMenu2)
+            ),
+            RestaurantMenu(
+                id: 3,
+                name: "돼지고기튀김",
+                price: 5_900,
+                image: .asset(.imgMenu3)
+            )
         ],
         aiSummary: RestaurantAISummary(
             title: "중국 본토의 맛 그대로, 차원이 다른 훠궈 전문점",
