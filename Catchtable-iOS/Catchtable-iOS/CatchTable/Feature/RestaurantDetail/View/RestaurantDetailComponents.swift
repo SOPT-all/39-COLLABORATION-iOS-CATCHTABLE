@@ -19,26 +19,28 @@ struct RestaurantDetailHeader: View {
     var body: some View {
         HStack(spacing: 0) {
             HStack(spacing: 16) {
-                headerIcon(.iconBack, size: 22)
-                headerIcon(.iconHome, size: 22)
+                Image(.iconBack)
+                    .resized(to: 22)
+
+                Image(.iconHome)
+                    .resized(to: 22)
             }
 
             Spacer(minLength: 0)
 
             HStack(spacing: 16) {
-                headerIcon(.iconSearchLg, size: 20)
-                headerIcon(.iconBookmark20, size: 20)
-                headerIcon(.iconShare20, size: 20)
+                Image(.iconSearchLg)
+                    .resized(to: 20)
+
+                Image(.iconBookmark20)
+                    .resized(to: 20)
+
+                Image(.iconShare20)
+                    .resized(to: 20)
             }
         }
         .padding(.horizontal, 20)
         .frame(height: 40)
-    }
-
-    private func headerIcon(_ icon: ImageResource, size: CGFloat) -> some View {
-        Image(icon)
-            .resizable()
-            .frame(width: size, height: size)
     }
 }
 
@@ -68,8 +70,7 @@ struct RestaurantPhotoCarousel: View {
     private var viewerBadge: some View {
         HStack(spacing: 2) {
             Image(.iconFire)
-                .resizable()
-                .frame(width: 20, height: 20)
+                .resized(to: 20)
 
             Text(viewerCountText)
                 .typography(.bodySb12)
@@ -116,8 +117,7 @@ struct RestaurantSummaryView: View {
             HStack(spacing: 4) {
                 HStack(spacing: 2) {
                     Image(.iconStarLg)
-                        .resizable()
-                        .frame(width: 20, height: 20)
+                        .resized(to: 20)
 
                     Text(detail.ratingText)
                         .typography(.h3Sb14)
@@ -130,8 +130,7 @@ struct RestaurantSummaryView: View {
                         .typography(.h3Sb14)
 
                     Image(.iconStoreNext)
-                        .resizable()
-                        .frame(width: 12, height: 12)
+                        .resized(to: 12)
                 }
             }
 
@@ -144,8 +143,7 @@ struct RestaurantSummaryView: View {
 
     private var separator: some View {
         Image(.iconSeparator)
-            .resizable()
-            .frame(width: 4, height: 4)
+            .resized(to: 4)
     }
 
     private func categoryText(_ text: String) -> some View {
@@ -191,8 +189,7 @@ struct RestaurantInfoRows: View {
 
                 HStack(spacing: 0) {
                     Image(.iconMap)
-                        .resizable()
-                        .frame(width: 20, height: 20)
+                        .resized(to: 20)
 
                     Text("위치")
                         .font(.pretendard(.medium, size: 13))
@@ -212,8 +209,7 @@ struct RestaurantInfoRows: View {
                 infoText(detail.priceRange)
 
                 Image(.iconHelpCompact)
-                    .resizable()
-                    .frame(width: 20, height: 20)
+                    .resized(to: 20)
             }
         }
         .frame(height: 20)
@@ -248,8 +244,7 @@ struct RestaurantInfoRows: View {
                     infoText(detail.phoneNumber)
 
                     Image(.iconInfo)
-                        .resizable()
-                        .frame(width: 14, height: 14)
+                        .resized(to: 14)
                 }
 
                 Text("복사")
@@ -262,14 +257,12 @@ struct RestaurantInfoRows: View {
 
     private var dropdownIcon: some View {
         Image(.iconDropdown)
-            .resizable()
-            .frame(width: 20, height: 20)
+            .resized(to: 20)
     }
 
     private func rowIcon(_ icon: ImageResource) -> some View {
         Image(icon)
-            .resizable()
-            .frame(width: 14, height: 14)
+            .resized(to: 14)
     }
 
     private func infoText(_ text: String) -> some View {
@@ -291,8 +284,7 @@ struct RestaurantMenuSection: View {
                         .foregroundStyle(.gray900)
 
                     Image(.iconStoreNext)
-                        .resizable()
-                        .frame(width: 12, height: 12)
+                        .resized(to: 12)
                 }
 
                 Spacer(minLength: 0)
@@ -344,19 +336,12 @@ struct RestaurantAISummaryTitle: View {
     var body: some View {
         HStack(spacing: 4) {
             Image(.iconSparkleLg)
-                .resizable()
-                .frame(width: 16, height: 16)
+                .resized(to: 16)
 
             HStack(spacing: 2) {
                 HStack(spacing: 0) {
                     Text("AI")
-                        .foregroundStyle(
-                            LinearGradient(
-                                colors: [.aiGradientStart, .aiGradientEnd],
-                                startPoint: .top,
-                                endPoint: .bottom
-                            )
-                        )
+                        .foregroundStyle(LinearGradient.aiGradient)
 
                     Text("가 요약했어요")
                         .foregroundStyle(.gray900)
@@ -364,8 +349,7 @@ struct RestaurantAISummaryTitle: View {
                 .typography(.displayB18)
 
                 Image(.iconHelp)
-                    .resizable()
-                    .frame(width: 20, height: 20)
+                    .resized(to: 20)
             }
         }
     }
@@ -407,14 +391,7 @@ struct RestaurantAISummaryCard: View {
         )
         .overlay {
             RoundedRectangle(cornerRadius: 14)
-                .strokeBorder(
-                    LinearGradient(
-                        colors: [.aiGradientStart, .aiGradientEnd],
-                        startPoint: .top,
-                        endPoint: .bottom
-                    ),
-                    lineWidth: 1
-                )
+                .strokeBorder(LinearGradient.aiGradient, lineWidth: 1)
         }
         .shadow(color: .black.opacity(0.06), radius: 4)
     }
@@ -422,8 +399,7 @@ struct RestaurantAISummaryCard: View {
     private func pointRow(_ point: String) -> some View {
         HStack(spacing: 0) {
             Image(.iconBullet)
-                .resizable()
-                .frame(width: 14, height: 14)
+                .resized(to: 14)
                 .frame(width: 24, height: 24)
 
             Text(point)
@@ -435,8 +411,7 @@ struct RestaurantAISummaryCard: View {
 
     private func feedbackIcon(_ icon: ImageResource) -> some View {
         Image(icon)
-            .resizable()
-            .frame(width: 28, height: 28)
+            .resized(to: 28)
     }
 }
 
@@ -469,8 +444,7 @@ struct RestaurantDetailBottomBar: View {
     private func barItem(_ icon: ImageResource, title: String) -> some View {
         VStack(spacing: 3) {
             Image(icon)
-                .resizable()
-                .frame(width: 24, height: 24)
+                .resized(to: 24)
 
             Text(title)
                 .typography(.captionB10)
@@ -479,4 +453,19 @@ struct RestaurantDetailBottomBar: View {
         }
         .frame(width: 36)
     }
+}
+
+private extension Image {
+    func resized(to size: CGFloat) -> some View {
+        resizable()
+            .frame(width: size, height: size)
+    }
+}
+
+private extension LinearGradient {
+    static let aiGradient = LinearGradient(
+        colors: [.aiGradientStart, .aiGradientEnd],
+        startPoint: .top,
+        endPoint: .bottom
+    )
 }
