@@ -52,3 +52,21 @@ struct CardVoteStore: View {
         }
     }
 }
+
+struct SubwayCard: View {
+    let station: SubwayStation
+    
+    var body: some View {
+        VStack(alignment: .leading, spacing: 4) {
+            HStack(spacing: 4) {
+                ForEach(station.lines, id: \.self) { line in
+                    SubwayLineLabel(line: line)
+                }
+            }
+            
+            Text("\(station.name)에서 \(station.distance)m")
+                .typography(.bodyB12)
+                .foregroundStyle(.gray900)
+        }
+    }
+}

@@ -14,3 +14,9 @@ struct VoteStore: Identifiable {
     let rating: String
     let reviewCount: String
 }
+
+struct SubwayStation {
+    let lines: [Line]
+    let name: String
+    let distance: Int
+}
