@@ -158,13 +158,13 @@ struct HomeRecentStoreChip: View {
                     .frame(width: 48, height: 48)
                     .clipShape(.rect(cornerRadius: 8))
 
-                VStack(alignment: .leading, spacing: 0) {
+                VStack(alignment: .leading, spacing: 4) {
                     Text(store.name)
                         .typography(.h3Sb14)
                         .foregroundStyle(.gray900)
                         .lineLimit(1)
 
-                    Text(store.info)
+                    Text(store.infoText)
                         .typography(.bodyRg12)
                         .foregroundStyle(.gray500)
                         .lineLimit(1)

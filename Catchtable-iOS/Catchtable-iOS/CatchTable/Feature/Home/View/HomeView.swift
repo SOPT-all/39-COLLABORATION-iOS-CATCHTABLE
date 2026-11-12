@@ -23,12 +23,17 @@ struct HomeView: View {
     }
 
     var body: some View {
-        ScrollView(.vertical, showsIndicators: false) {
-            VStack(spacing: 20) {
-                topSheet
-                contentSheet
+        VStack(spacing: 0) {
+            HomeHeader()
+                .padding(.horizontal, 20)
+
+            ScrollView(.vertical, showsIndicators: false) {
+                VStack(spacing: 20) {
+                    topSheet
+                    contentSheet
+                }
+                .background(Color.gray200)
             }
-            .background(Color.gray200)
         }
         .background(Color.white)
         .overlay(alignment: .bottom) {
@@ -42,9 +47,6 @@ struct HomeView: View {
 
     private var topSheet: some View {
         VStack(spacing: 0) {
-            HomeHeader()
-                .padding(.horizontal, 20)
-
             banner
                 .padding(.top, 18)
                 .padding(.horizontal, 20)
@@ -164,6 +166,7 @@ struct HomeView: View {
                 .padding(.horizontal, 20)
             }
         }
+        .padding(.bottom, 28)
     }
 
     private var favoriteSection: some View {
