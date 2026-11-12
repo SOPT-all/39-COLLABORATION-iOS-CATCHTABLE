@@ -100,12 +100,32 @@ final class CompareRestaurantViewModel {
         }
     }
     
+    var isCompletedPresented = false
+    
+    private var pendingVote: String?
+    
     func vote(name: String) {
-        guard let id = selectedStoreId else { return }
+        pendingVote = name
+        isSheetPresented = false
+    }
+    
+    func sheetDismissed() {
+        if pendingVote != nil {
+            isCompletedPresented = true
+        }
+    }
+    
+    func showAfterVote() {
+        applyPendingVote()
+        isCompletedPresented = false
+    }
+    
+    private func applyPendingVote() {
+        guard let id = selectedStoreId, let name = pendingVote else { return }
         voters[id, default: []].append(name)
         selectedStoreId = nil
         hasVoted = true
-        isSheetPresented = false
+        pendingVote = nil
     }
     
     var voterLines: Int {

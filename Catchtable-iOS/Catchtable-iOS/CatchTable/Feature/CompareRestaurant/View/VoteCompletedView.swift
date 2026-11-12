@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct VoteCompletedView: View {
+    let onShowAfterVote: () -> Void
+    
     var body: some View {
         VStack(alignment: .center, spacing: 0) {
             Spacer()
@@ -41,13 +43,9 @@ struct VoteCompletedView: View {
             
             Spacer()
             
-            CatchTableButton(title: "투표 현황 보러가기", variant: .outlined, action: {})
+            CatchTableButton(title: "투표 현황 보러가기", variant: .outlined, action: onShowAfterVote)
         }
         .padding(.horizontal, 20)
         .background(.white, ignoresSafeAreaEdges: .bottom)
     }
-}
-
-#Preview {
-    VoteCompletedView()
 }

@@ -49,10 +49,13 @@ struct CompareRestaurantView: View {
                 .background(.white)
                 .disabled(!viewModel.isButtonEnabled)
         }
-        .sheet(isPresented: $viewModel.isSheetPresented) {
+        .sheet(isPresented: $viewModel.isSheetPresented, onDismiss: viewModel.sheetDismissed) {
             SetNicknameSheet { name in
                 viewModel.vote(name: name)
             }
+        }
+        .fullScreenCover(isPresented: $viewModel.isCompletedPresented) {
+            VoteCompletedView(onShowAfterVote: viewModel.showAfterVote)
         }
     }
 }
