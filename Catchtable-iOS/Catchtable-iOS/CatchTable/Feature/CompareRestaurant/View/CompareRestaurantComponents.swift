@@ -135,7 +135,7 @@ struct MainMenuInfoCard: View {
     let info: MainMenuInfo
     
     var body: some View {
-        VStack(alignment: .center, spacing: 8) {
+        VStack(alignment: .leading, spacing: 8) {
             Image(info.image)
                 .resizable()
                 .scaledToFill()
@@ -220,33 +220,39 @@ struct HalfContainer: View {
                 onSelect: { isSelected.toggle() },
                 onReserve: {}
             )
+            .padding(.horizontal, 12)
             
             CardDivider(isGray: isGray)
             
             SubwayCard(station: restaurant.station)
                 .frame(width: cardWidth, alignment: .leading)
+                .padding(.horizontal, 12)
             
             CardDivider(isGray: isGray)
             
             AISummaryCard(store: restaurant.store)
                 .frame(width: cardWidth, alignment: .leading)
+                .padding(.horizontal, 12)
             
             CardDivider(isGray: isGray)
             
             PriceRangeCard(store: restaurant.store)
                 .frame(width: cardWidth, alignment: .leading)
+                .padding(.horizontal, 12)
             
             CardDivider(isGray: isGray)
             
             MainMenuCard(menus: restaurant.menus, onTap: {})
                 .frame(width: cardWidth, alignment: .leading)
+                .padding(.horizontal, 12)
             
             CardDivider(isGray: isGray)
             
             CorkageCard(corkages: restaurant.corkages)
                 .frame(width: cardWidth, alignment: .leading)
+                .padding(.horizontal, 12)
         }
-        .padding(12)
+        .padding(.vertical, 12)
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
         .background(isGray ? .gray100 : .white)
     }
