@@ -18,6 +18,7 @@ var pinkGradient: LinearGradient {
 struct VoteStoreCard: View {
     let store: VoteStore
     let isSelected: Bool
+    let showCheckbox: Bool
     let onSelect: () -> Void
     let onReserve: () -> Void
     
@@ -30,14 +31,16 @@ struct VoteStoreCard: View {
                     .frame(width: 148, height: 148)
                     .clipShape(.rect(cornerRadius: 16))
                 
-                Button(action: onSelect) {
-                    Image(isSelected ? .btnSelectionSelected : .btnSelectionCheck)
-                        .resizable()
-                        .frame(width: 24, height: 24)
-                        .padding(.trailing, 12)
-                        .padding(.top, 12)
+                if showCheckbox {
+                    Button(action: onSelect) {
+                        Image(isSelected ? .btnSelectionSelected : .btnSelectionCheck)
+                            .resizable()
+                            .frame(width: 24, height: 24)
+                            .padding(.trailing, 12)
+                            .padding(.top, 12)
+                    }
+                    .buttonStyle(.plain)
                 }
-                .buttonStyle(.plain)
             }
             
             VStack(alignment: .leading, spacing: 6) {
@@ -234,6 +237,10 @@ struct HalfContainer: View {
     let restaurant: CompareRestaurant
     let isSelected: Bool
     let onSelect: () -> Void
+    let showCheckbox: Bool
+    let showVoteMemberCard: Bool
+    let voteCount: Int
+    let voterNames: [String]
     var isGray: Bool
     
     let cardWidth: CGFloat = 148
@@ -243,12 +250,21 @@ struct HalfContainer: View {
             VoteStoreCard(
                 store: restaurant.store,
                 isSelected: isSelected,
+                showCheckbox: showCheckbox,
                 onSelect: onSelect,
                 onReserve: {}
             )
             .padding(.horizontal, 12)
             
             CardDivider(isGray: isGray)
+            
+            if showVoteMemberCard {
+                VoteMemberCard(count: voteCount, names: voterNames)
+                    .frame(width: cardWidth, alignment: .leading)
+                    .padding(.horizontal, 12)
+                
+                CardDivider(isGray: isGray)
+            }
             
             SubwayCard(station: restaurant.station)
                 .frame(width: cardWidth, alignment: .leading)
