@@ -8,11 +8,19 @@
 import SwiftUI
 
 struct CompareRestaurantView: View {
-    @State private var viewModel = CompareRestaurantViewModel()
+    @State private var viewModel: CompareRestaurantViewModel
+    
+    init(role: VoteRole) {
+        _viewModel = State(initialValue: CompareRestaurantViewModel(role: role))
+    }
     
     var body: some View {
         VStack(spacing: 0) {
-            VoteHeader(onBack: {})
+            VoteHeader(
+                onBack: {},
+                onEndVote: viewModel.showEndVoteButton ? { viewModel.endVote() } : nil,
+                onShare: viewModel.showShareButton ? { } : nil
+            )
             
             ScrollView {
                 HStack(alignment: .center, spacing: 0) {
@@ -21,6 +29,10 @@ struct CompareRestaurantView: View {
                             restaurant: restaurant,
                             isSelected: viewModel.isSelected(restaurant),
                             onSelect: { viewModel.select(restaurant) },
+                            showCheckbox: viewModel.showCheckbox,
+                            showVoteMemberCard: viewModel.showVoteMemberCard,
+                            voteCount: viewModel.voteCount(for: restaurant),
+                            voterNames: viewModel.voterNames(for: restaurant),
                             isGray: index % 2 == 1
                         )
                     }
@@ -29,15 +41,20 @@ struct CompareRestaurantView: View {
             }
             .padding(.top, 20)
             
-            ReserveButton(title: viewModel.buttonTitle, action: viewModel.completeVote)
+            ReserveButton(title: viewModel.buttonTitle, action: viewModel.bottomButtonTapped)
                 .padding(.horizontal, 19)
                 .padding(.top, 12)
                 .background(.white)
-                .disabled(!viewModel.isVoted)
+                .disabled(!viewModel.isButtonEnabled)
+        }
+        .sheet(isPresented: $viewModel.isSheetPresented) {
+            SetNicknameSheet { name in
+                viewModel.vote(name: name)
+            }
         }
     }
 }
 
 #Preview {
-    CompareRestaurantView()
+    CompareRestaurantView(role: .participant)
 }
