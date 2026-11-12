@@ -364,6 +364,7 @@ struct RestaurantAISummaryCard: View {
                 Text(summary.title)
                     .typography(.bodySb12)
                     .foregroundStyle(.gray900)
+                    .frame(height: 18)
 
                 VStack(alignment: .leading, spacing: 6) {
                     ForEach(summary.points, id: \.self) { point in
