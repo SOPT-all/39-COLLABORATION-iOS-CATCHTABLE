@@ -9,7 +9,7 @@ import SwiftUI
 
 var pinkGradient: LinearGradient {
     LinearGradient(
-        colors: [Color("pinkGradientStart"), Color("pinkGradientEnd")],
+        colors: [.pinkGradientStart, .pinkGradientEnd],
         startPoint: .top,
         endPoint: .bottom
     )
@@ -49,11 +49,11 @@ struct VoteStoreCard: View {
                         .foregroundStyle(.accentYellow)
                     
                     Text(store.rating)
-                        .typography(.bodyRg12)
+                        .typography(.bodyMd12)
                         .foregroundStyle(.gray900)
                         .padding(.leading, 4)
                     
-                    Text("(\(store.reviewCount))")
+                    Text("( \(store.reviewCount))")
                         .typography(.bodyRg12)
                         .foregroundStyle(.gray500)
                 }
@@ -198,5 +198,61 @@ struct CardTitle: View {
         Text(title)
             .typography(.h3B14)
             .foregroundStyle(.gray900)
+    }
+}
+
+struct HalfContainer: View {
+    let restaurant: CompareRestaurant
+    @Binding var isSelected: Bool
+    var isGray: Bool
+    
+    let cardWidth: CGFloat = 148
+    
+    var body: some View {
+        VStack(alignment: .center, spacing: 16) {
+            VoteStoreCard(
+                store: restaurant.store,
+                isSelected: isSelected,
+                onTap: {})
+            
+            CardDivider(isGray: isGray)
+            
+            SubwayCard(station: restaurant.station)
+                .frame(width: cardWidth, alignment: .leading)
+            
+            CardDivider(isGray: isGray)
+            
+            AISummaryCard(store: restaurant.store)
+                .frame(width: cardWidth, alignment: .leading)
+            
+            CardDivider(isGray: isGray)
+            
+            PriceRangeCard(store: restaurant.store)
+                .frame(width: cardWidth, alignment: .leading)
+            
+            CardDivider(isGray: isGray)
+            
+            MainMenuCard(menus: restaurant.menus, onTap: {})
+                .frame(width: cardWidth, alignment: .leading)
+            
+            CardDivider(isGray: isGray)
+            
+            CorkageCard(corkages: restaurant.corkages)
+                .frame(width: cardWidth, alignment: .leading)
+        }
+        .padding(12)
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
+        .background(isGray ? .gray100 : .white)
+    }
+}
+
+struct CardDivider: View {
+    var isGray: Bool
+    
+    var body: some View {
+        Rectangle()
+            .frame(maxWidth: .infinity)
+            .frame(height: 1)
+            .overlay(isGray ? .white : .gray200)
     }
 }
