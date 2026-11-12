@@ -59,7 +59,3 @@ struct CompareRestaurantView: View {
         }
     }
 }
-
-#Preview {
-    CompareRestaurantView(role: .participant)
-}
