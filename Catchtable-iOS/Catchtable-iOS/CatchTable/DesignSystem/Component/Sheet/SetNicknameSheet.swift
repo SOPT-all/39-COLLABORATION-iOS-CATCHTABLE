@@ -19,6 +19,12 @@ struct SetNicknameSheet: View {
     let onVote: (String) -> Void
     private let maxCount: Int = 12
     private var inputCount: Int { nickname.count }
+    private var isCountFull: Bool { inputCount >= maxCount }
+
+    private var countColor: Color {
+        if inputCount == 0 { return .gray400 }
+        return isCountFull ? .orangeBase : .gray900
+    }
     
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
@@ -62,8 +68,15 @@ struct SetNicknameSheet: View {
         .padding(.horizontal, 20)
         .fixedSize(horizontal: false, vertical: true)
         .frame(maxHeight: .infinity, alignment: .top)
+        .overlay(alignment: .top) {
+            Capsule()
+                .fill(Color.gray200)
+                .frame(width: 50, height: 6)
+                .padding(.top, 13)
+        }
         .presentationDetents([.height(372)])
-        .presentationDragIndicator(.visible)
+        .presentationDragIndicator(.hidden)
+        .presentationCornerRadius(36)
         .presentationBackground(.white)
     }
     
@@ -93,7 +106,7 @@ struct SetNicknameSheet: View {
                 "nickname",
                 text: $nickname,
                 prompt: Text("닉네임을 입력해주세요.")
-                    .foregroundStyle(.gray200)
+                    .foregroundStyle(.gray300)
             )
             .typography(.h3Md14)
             .foregroundStyle(.gray900)
@@ -107,8 +120,8 @@ struct SetNicknameSheet: View {
             Spacer()
             
             Text("\(inputCount)/\(maxCount)자")
-                .typography(.captionMd10)
-                .foregroundStyle(inputCount >= maxCount ? .orangeBase : .gray900)
+                .typography(isCountFull ? .captionB10 : .captionMd10)
+                .foregroundStyle(countColor)
         }
         .padding(12)
         .frame(maxWidth: .infinity)

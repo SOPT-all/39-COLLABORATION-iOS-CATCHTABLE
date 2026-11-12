@@ -21,7 +21,7 @@ struct PickTogetherButton: View {
                     .typography(.bodyMd12)
                     .foregroundStyle(.gray900)
             }
-            .padding(.horizontal, 12)
+            .padding(.horizontal, 13)
             .frame(height: 34)
             .background(Color.white, in: .capsule)
             .overlay {

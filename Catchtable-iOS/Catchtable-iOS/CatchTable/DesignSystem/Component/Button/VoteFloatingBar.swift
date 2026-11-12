@@ -20,22 +20,28 @@ struct VoteFloatingBar: View {
                     .frame(width: 24, height: 24)
                     .padding(.trailing, 12)
 
-                Text(title)
-                    .typography(.bodyMd12)
-                    .foregroundStyle(.white)
-                    .lineLimit(1)
+                HStack(spacing: 4) {
+                    Text(title)
+                        .typography(.bodyMd12)
+                        .foregroundStyle(.white)
 
-                Text(" · \(restaurantCount)개 식당")
-                    .typography(.bodyMd12)
-                    .foregroundStyle(.gray500)
-                    .lineLimit(1)
+                    Text("·")
+                        .typography(.captionMd10)
+                        .foregroundStyle(.gray500)
+
+                    Text("\(restaurantCount)개 식당")
+                        .typography(.bodyMd12)
+                        .foregroundStyle(.gray500)
+                }
+                .lineLimit(1)
 
                 Spacer(minLength: 0)
 
-                Image(.iconVoteNextWhite)
+                Image(.iconHomeNext)
+                    .renderingMode(.template)
                     .resizable()
+                    .foregroundStyle(.white)
                     .frame(width: 12, height: 12)
-                    .frame(width: 20, height: 20)
             }
             .frame(height: 36)
             .padding(.horizontal, 12)

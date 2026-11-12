@@ -14,6 +14,7 @@ enum RestaurantDetailTab: Hashable, CaseIterable {
     case photo
     case review
     case broadcast
+    case storeInfo
 
     var title: String {
         switch self {
@@ -23,6 +24,7 @@ enum RestaurantDetailTab: Hashable, CaseIterable {
         case .photo: return "사진"
         case .review: return "리뷰"
         case .broadcast: return "방송"
+        case .storeInfo: return "매장정보"
         }
     }
 }
@@ -33,16 +35,14 @@ struct RestaurantDetailTabBar: View {
     let reviewCount: Int
 
     var body: some View {
-        HStack(spacing: 0) {
-            ForEach(RestaurantDetailTab.allCases, id: \.self) { tab in
-                if tab != RestaurantDetailTab.allCases.first {
-                    Spacer(minLength: 0)
+        ScrollView(.horizontal, showsIndicators: false) {
+            HStack(spacing: 16) {
+                ForEach(RestaurantDetailTab.allCases, id: \.self) { tab in
+                    tabButton(tab)
                 }
-
-                tabButton(tab)
             }
+            .padding(.horizontal, 21)
         }
-        .padding(.horizontal, 21)
         .background(alignment: .bottom) {
             Rectangle()
                 .fill(Color.gray100)
