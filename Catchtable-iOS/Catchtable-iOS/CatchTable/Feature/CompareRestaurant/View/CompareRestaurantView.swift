@@ -29,6 +29,9 @@ struct CompareRestaurantView: View {
 
             ReserveButton(title: isLeftSelected || isRightSelected ? "매장 선택 완료" : "가고 싶은 매장을 투표해주세요", action: {})
                 .padding(.horizontal, 19)
+                .padding(.top, 12)
+                .background(.white)
+                .disabled(!isLeftSelected && !isRightSelected)
         }
     }
 }
