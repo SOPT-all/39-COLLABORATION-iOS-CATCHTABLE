@@ -195,6 +195,31 @@ struct CorkageCard: View {
     }
 }
 
+struct VoteMemberCard: View {
+    let count: Int
+    let names: [String]
+    
+    var body: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            CardTitle(title: "\(count)명 투표")
+            
+            VStack(alignment: .leading, spacing: 4) {
+                ForEach(names, id: \.self) { name in
+                    HStack(alignment: .center, spacing: 4) {
+                        Image(.iconProfile)
+                            .resizable()
+                            .frame(width: 14, height: 14)
+                        
+                        Text(name)
+                            .typography(.bodyRg12)
+                            .foregroundStyle(.gray600)
+                    }
+                }
+            }
+        }
+    }
+}
+
 struct CardTitle: View {
     let title: String
     
