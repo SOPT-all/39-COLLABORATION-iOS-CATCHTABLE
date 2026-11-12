@@ -18,7 +18,8 @@ var pinkGradient: LinearGradient {
 struct VoteStoreCard: View {
     let store: VoteStore
     let isSelected: Bool
-    var onTap: () -> Void
+    let onSelect: () -> Void
+    let onReserve: () -> Void
     
     var body: some View {
         VStack(alignment: .leading, spacing: 4) {
@@ -29,11 +30,14 @@ struct VoteStoreCard: View {
                     .frame(width: 148, height: 148)
                     .clipShape(.rect(cornerRadius: 16))
                 
-                Image(isSelected ? .btnSelectionSelected : .btnSelectionCheck)
-                    .resizable()
-                    .frame(width: 24, height: 24)
-                    .padding(.trailing, 12)
-                    .padding(.top, 12)
+                Button(action: onSelect) {
+                    Image(isSelected ? .btnSelectionSelected : .btnSelectionCheck)
+                        .resizable()
+                        .frame(width: 24, height: 24)
+                        .padding(.trailing, 12)
+                        .padding(.top, 12)
+                }
+                .buttonStyle(.plain)
             }
             
             VStack(alignment: .leading, spacing: 6) {
@@ -53,13 +57,13 @@ struct VoteStoreCard: View {
                         .foregroundStyle(.gray900)
                         .padding(.leading, 4)
                     
-                    Text("( \(store.reviewCount))")
+                    Text(" (\(store.reviewCount))")
                         .typography(.bodyRg12)
                         .foregroundStyle(.gray500)
                 }
             }
             
-            ChipButton(style: .reserveOutlined, action: onTap)
+            ChipButton(style: .reserveOutlined, action: onReserve)
                 .padding(.top, 44)
         }
     }
@@ -213,7 +217,9 @@ struct HalfContainer: View {
             VoteStoreCard(
                 store: restaurant.store,
                 isSelected: isSelected,
-                onTap: {})
+                onSelect: { isSelected.toggle() },
+                onReserve: {}
+            )
             
             CardDivider(isGray: isGray)
             
