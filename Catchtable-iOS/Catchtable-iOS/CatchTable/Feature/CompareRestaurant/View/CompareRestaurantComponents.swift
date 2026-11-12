@@ -207,7 +207,8 @@ struct CardTitle: View {
 
 struct HalfContainer: View {
     let restaurant: CompareRestaurant
-    @Binding var isSelected: Bool
+    let isSelected: Bool
+    let onSelect: () -> Void
     var isGray: Bool
     
     let cardWidth: CGFloat = 148
@@ -217,7 +218,7 @@ struct HalfContainer: View {
             VoteStoreCard(
                 store: restaurant.store,
                 isSelected: isSelected,
-                onSelect: { isSelected.toggle() },
+                onSelect: onSelect,
                 onReserve: {}
             )
             .padding(.horizontal, 12)
