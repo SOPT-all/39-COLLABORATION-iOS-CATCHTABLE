@@ -25,7 +25,6 @@ struct HomeView: View {
     var body: some View {
         VStack(spacing: 0) {
             HomeHeader()
-                .padding(.horizontal, 20)
 
             ScrollView(.vertical, showsIndicators: false) {
                 VStack(spacing: 20) {
