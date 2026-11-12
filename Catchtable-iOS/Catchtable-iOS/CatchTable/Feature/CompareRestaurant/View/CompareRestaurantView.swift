@@ -19,7 +19,7 @@ struct CompareRestaurantView: View {
             VoteHeader(
                 onBack: {},
                 onEndVote: viewModel.showEndVoteButton ? { viewModel.endVote() } : nil,
-                onShare: viewModel.showShareButton ? { } : nil
+                onShare: viewModel.showShareButton ? {} : nil
             )
             
             ScrollView {
@@ -28,8 +28,8 @@ struct CompareRestaurantView: View {
                         HalfContainer(
                             restaurant: restaurant,
                             isSelected: viewModel.isSelected(restaurant),
-                            onSelect: { viewModel.select(restaurant) },
                             showCheckbox: viewModel.showCheckbox,
+                            onSelect: { viewModel.select(restaurant) },
                             showVoteMemberCard: viewModel.showVoteMemberCard,
                             voteCount: viewModel.voteCount(for: restaurant),
                             voterNames: viewModel.voterNames(for: restaurant),

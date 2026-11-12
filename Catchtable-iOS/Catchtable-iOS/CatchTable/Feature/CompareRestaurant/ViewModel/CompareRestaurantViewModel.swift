@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import Observation
 
 enum VoteRole {
     case host
@@ -21,16 +20,17 @@ enum VotePhase {
 @Observable
 final class CompareRestaurantViewModel {
     let role: VoteRole
+    
     private(set) var phase: VotePhase
-    
     private(set) var restaurants: [CompareRestaurant] = []
-    
     private(set) var candidateIds: Set<UUID> = []
     private(set) var selectedStoreId: UUID?
     private(set) var voters: [UUID: [String]] = [:]
     private(set) var hasVoted = false
+    private var pendingVote: String?
     
     var isSheetPresented = false
+    var isCompletedPresented = false
     
     init(role: VoteRole) {
         self.role = role
@@ -42,7 +42,7 @@ final class CompareRestaurantViewModel {
     var showShareButton: Bool { phase == .voting }
     var showEndVoteButton: Bool { phase == .voting && role == .host }
     
-    var showCheckbox: Bool { !hasVoted}
+    var showCheckbox: Bool { !hasVoted }
     
     func isSelected(_ restaurant: CompareRestaurant) -> Bool {
         switch phase {
@@ -68,7 +68,7 @@ final class CompareRestaurantViewModel {
     }
     
     var showVoteMemberCard: Bool {
-        voters.values.contains { !$0.isEmpty}
+        voters.values.contains { !$0.isEmpty }
     }
     
     func voteCount(for restaurant: CompareRestaurant) -> Int {
@@ -76,13 +76,17 @@ final class CompareRestaurantViewModel {
     }
     
     func voterNames(for restaurant: CompareRestaurant) -> [String] {
-        Array((voters[restaurant.store.id] ?? []))
+        Array(voters[restaurant.store.id] ?? [])
+    }
+    
+    var voterLines: Int {
+        restaurants.map { voterNames(for: $0).count }.max() ?? 0
     }
     
     var buttonTitle: String {
         switch phase {
         case .creating: "\(candidateIds.count)개 · 투표 링크 공유하기"
-        case .voting: selectedStoreId == nil ? "가고 싶은 매장을 투표하세요" : "매장 선택 완료"
+        case .voting: selectedStoreId == nil ? "가고 싶은 매장을 투표해주세요" : "매장 선택 완료"
         }
     }
     
@@ -99,10 +103,6 @@ final class CompareRestaurantViewModel {
         case .voting: isSheetPresented = true
         }
     }
-    
-    var isCompletedPresented = false
-    
-    private var pendingVote: String?
     
     func vote(name: String) {
         pendingVote = name
@@ -126,10 +126,6 @@ final class CompareRestaurantViewModel {
         selectedStoreId = nil
         hasVoted = true
         pendingVote = nil
-    }
-    
-    var voterLines: Int {
-        restaurants.map { voterNames(for: $0).count }.max() ?? 0
     }
     
     func endVote() {

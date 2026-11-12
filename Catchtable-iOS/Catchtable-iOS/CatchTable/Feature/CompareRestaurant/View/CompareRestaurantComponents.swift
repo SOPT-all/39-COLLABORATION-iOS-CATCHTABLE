@@ -234,6 +234,7 @@ struct VoteMemberRow: View {
             Text(name)
                 .typography(.bodyRg12)
                 .foregroundStyle(.gray600)
+                .lineLimit(1)
         }
     }
 }
@@ -251,8 +252,8 @@ struct CardTitle: View {
 struct HalfContainer: View {
     let restaurant: CompareRestaurant
     let isSelected: Bool
-    let onSelect: () -> Void
     let showCheckbox: Bool
+    let onSelect: () -> Void
     let showVoteMemberCard: Bool
     let voteCount: Int
     let voterNames: [String]
