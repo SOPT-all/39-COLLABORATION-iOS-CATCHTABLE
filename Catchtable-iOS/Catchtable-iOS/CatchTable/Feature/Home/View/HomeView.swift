@@ -75,11 +75,6 @@ struct HomeView: View {
             .frame(maxWidth: .infinity)
             .frame(height: 140)
             .clipShape(.rect(cornerRadius: 8))
-            .overlay(alignment: .bottomTrailing) {
-                PhotoPageButton(currentPage: 14, totalPage: 23) { }
-                    .padding(.trailing, 18)
-                    .padding(.bottom, 12)
-            }
     }
 
     private var contentSheet: some View {
