@@ -108,6 +108,10 @@ final class CompareRestaurantViewModel {
         isSheetPresented = false
     }
     
+    var voterLines: Int {
+        restaurants.map { voterNames(for: $0).count }.max() ?? 0
+    }
+    
     func endVote() {
         // TODO: API
     }

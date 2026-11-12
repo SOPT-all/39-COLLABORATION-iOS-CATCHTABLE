@@ -33,6 +33,7 @@ struct CompareRestaurantView: View {
                             showVoteMemberCard: viewModel.showVoteMemberCard,
                             voteCount: viewModel.voteCount(for: restaurant),
                             voterNames: viewModel.voterNames(for: restaurant),
+                            voterLines: viewModel.voterLines,
                             isGray: index % 2 == 1
                         )
                     }

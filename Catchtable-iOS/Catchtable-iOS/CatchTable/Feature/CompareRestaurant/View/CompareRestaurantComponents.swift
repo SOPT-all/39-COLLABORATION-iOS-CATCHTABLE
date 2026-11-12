@@ -201,24 +201,39 @@ struct CorkageCard: View {
 struct VoteMemberCard: View {
     let count: Int
     let names: [String]
+    let voterLines: Int
     
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
             CardTitle(title: "\(count)명 투표")
             
-            VStack(alignment: .leading, spacing: 4) {
-                ForEach(names, id: \.self) { name in
-                    HStack(alignment: .center, spacing: 4) {
-                        Image(.iconProfile)
-                            .resizable()
-                            .frame(width: 14, height: 14)
-                        
-                        Text(name)
-                            .typography(.bodyRg12)
-                            .foregroundStyle(.gray600)
+            if voterLines > 0 {
+                VStack(alignment: .leading, spacing: 4) {
+                    ForEach(names, id: \.self) { name in
+                        VoteMemberRow(name: name)
+                    }
+                    
+                    ForEach(0..<max(0, voterLines - names.count), id: \.self) { _ in
+                        VoteMemberRow(name: " ").hidden()
                     }
                 }
             }
+        }
+    }
+}
+
+struct VoteMemberRow: View {
+    let name: String
+    
+    var body: some View {
+        HStack(alignment: .center, spacing: 4) {
+            Image(.iconProfile)
+                .resizable()
+                .frame(width: 14, height: 14)
+            
+            Text(name)
+                .typography(.bodyRg12)
+                .foregroundStyle(.gray600)
         }
     }
 }
@@ -241,6 +256,7 @@ struct HalfContainer: View {
     let showVoteMemberCard: Bool
     let voteCount: Int
     let voterNames: [String]
+    let voterLines: Int
     var isGray: Bool
     
     let cardWidth: CGFloat = 148
@@ -259,7 +275,7 @@ struct HalfContainer: View {
             CardDivider(isGray: isGray)
             
             if showVoteMemberCard {
-                VoteMemberCard(count: voteCount, names: voterNames)
+                VoteMemberCard(count: voteCount, names: voterNames, voterLines: voterLines)
                     .frame(width: cardWidth, alignment: .leading)
                     .padding(.horizontal, 12)
                 
