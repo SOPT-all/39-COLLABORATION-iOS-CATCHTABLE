@@ -38,10 +38,11 @@ struct CompareRestaurantView: View {
                     }
                 }
                 .padding(.horizontal, 12)
+                .padding(.bottom, 24)
             }
             .padding(.top, 20)
             
-            ReserveButton(title: viewModel.buttonTitle, action: viewModel.bottomButtonTapped)
+            CatchTableButton(title: viewModel.buttonTitle, variant: .filled, action: viewModel.bottomButtonTapped)
                 .padding(.horizontal, 19)
                 .padding(.top, 12)
                 .background(.white)
