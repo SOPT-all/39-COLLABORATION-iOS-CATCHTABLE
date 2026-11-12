@@ -10,6 +10,7 @@ import SwiftUI
 struct RestaurantDetailView: View {
     @State private var viewModel: RestaurantDetailViewModel
     @State private var selectedTab: RestaurantDetailTab = .home
+    @State private var isBookmarked = false
 
     init(
         restaurantID: Int = 1,
@@ -25,7 +26,13 @@ struct RestaurantDetailView: View {
 
     var body: some View {
         VStack(spacing: 0) {
-            RestaurantDetailHeader()
+            StoreHeader(
+                onBack: { },
+                onHome: { },
+                isBookmarked: isBookmarked,
+                onBookmark: { isBookmarked.toggle() }
+            )
+
             content
         }
         .background(Color.white)

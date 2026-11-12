@@ -15,35 +15,6 @@ struct RestaurantDetailDivider: View {
     }
 }
 
-struct RestaurantDetailHeader: View {
-    var body: some View {
-        HStack(spacing: 0) {
-            HStack(spacing: 16) {
-                Image(.iconBack)
-                    .resized(to: 22)
-
-                Image(.iconHome)
-                    .resized(to: 22)
-            }
-
-            Spacer(minLength: 0)
-
-            HStack(spacing: 16) {
-                Image(.iconSearchLg)
-                    .resized(to: 20)
-
-                Image(.iconBookmark20)
-                    .resized(to: 20)
-
-                Image(.iconShare20)
-                    .resized(to: 20)
-            }
-        }
-        .padding(.horizontal, 20)
-        .frame(height: 40)
-    }
-}
-
 struct RestaurantPhotoCarousel: View {
     let photos: [RestaurantPhoto]
     let viewerCountText: String
