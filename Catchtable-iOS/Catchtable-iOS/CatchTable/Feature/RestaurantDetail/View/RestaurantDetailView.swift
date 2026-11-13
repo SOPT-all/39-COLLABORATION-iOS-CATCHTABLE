@@ -12,9 +12,11 @@ struct RestaurantDetailView: View {
     @State private var selectedTab: RestaurantDetailTab = .home
     @State private var isBookmarked = false
 
+    @Environment(\.dismiss) private var dismiss
+
     init(
         restaurantID: Int = 1,
-        service: any RestaurantDetailServiceProtocol = MockRestaurantDetailService()
+        service: any RestaurantDetailServiceProtocol = RestaurantDetailService()
     ) {
         _viewModel = State(
             initialValue: RestaurantDetailViewModel(
@@ -27,7 +29,7 @@ struct RestaurantDetailView: View {
     var body: some View {
         VStack(spacing: 0) {
             StoreHeader(
-                onBack: { },
+                onBack: { dismiss() },
                 onHome: { },
                 isBookmarked: isBookmarked,
                 onBookmark: { isBookmarked.toggle() }
@@ -36,6 +38,7 @@ struct RestaurantDetailView: View {
             content
         }
         .background(Color.white)
+        .toolbar(.hidden, for: .navigationBar)
         .task {
             await viewModel.load()
         }
@@ -78,10 +81,12 @@ struct RestaurantDetailView: View {
                 tabSection(detail)
                     .padding(.top, 12)
 
-                aiSection(detail.aiSummary)
-                    .padding(.top, 28)
-                    .padding(.bottom, 74)
+                if let aiSummary = detail.aiSummary {
+                    aiSection(aiSummary)
+                        .padding(.top, 28)
+                }
             }
+            .padding(.bottom, 74)
         }
         .safeAreaInset(edge: .bottom, spacing: 0) {
             RestaurantDetailBottomBar(

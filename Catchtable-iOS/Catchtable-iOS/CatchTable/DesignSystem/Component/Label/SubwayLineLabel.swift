@@ -69,6 +69,13 @@ enum Line {
     }
 }
 
+extension Line: CaseIterable {
+    init?(name: String) {
+        guard let line = Self.allCases.first(where: { $0.name == name }) else { return nil }
+        self = line
+    }
+}
+
 struct SubwayLineLabel: View {
     let line: Line
     
