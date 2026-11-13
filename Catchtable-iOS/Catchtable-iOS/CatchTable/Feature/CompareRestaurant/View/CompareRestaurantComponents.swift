@@ -142,11 +142,9 @@ private struct MainMenuInfoCard: View {
                     .typography(.bodyB12)
                     .foregroundStyle(.gray900)
                 
-                HStack(alignment: .center, spacing: 0) {
-                    Text("\(info.price.formatted())원\(info.isPriceOver ? " ~" : "")")
-                        .typography(.bodyRg12)
-                        .foregroundStyle(.gray500)
-                }
+                Text("\(info.price.formatted())원\(info.isPriceOver ? " ~" : "")")
+                    .typography(.bodyRg12)
+                    .foregroundStyle(.gray500)
             }
         }
     }
@@ -250,9 +248,9 @@ struct HalfContainer: View {
     let voteCount: Int
     let voterNames: [String]
     let voterLines: Int
-    var isGray: Bool
+    let isGray: Bool
     
-    let cardWidth: CGFloat = 148
+    private let cardWidth: CGFloat = 148
     
     var body: some View {
         VStack(alignment: .center, spacing: 16) {
@@ -314,8 +312,8 @@ private struct CardDivider: View {
     
     var body: some View {
         Rectangle()
+            .fill(isGray ? .white : .gray200)
             .frame(maxWidth: .infinity)
             .frame(height: 1)
-            .overlay(isGray ? .white : .gray200)
     }
 }
