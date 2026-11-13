@@ -11,7 +11,9 @@ import SwiftUI
 struct CatchTableApp: App {
     var body: some Scene {
         WindowGroup {
-            HomeView()
+            NavigationStack {
+                MainTabView()
+            }
         }
     }
 }

@@ -14,7 +14,7 @@ struct MainTabView: View {
         ZStack(alignment: .bottom) {
             TabView(selection: $selectedTab) {
                 // TODO: View 연동 필요
-                Text("Home").tag(MainTab.home)
+                HomeView().tag(MainTab.home)
                 Text("Saved").tag(MainTab.saved)
                 Text("Nearby").tag(MainTab.nearby)
                 Text("Dining").tag(MainTab.dining)
@@ -24,6 +24,7 @@ struct MainTabView: View {
             
             CatchTableTabBar(selectedTab: $selectedTab)
         }
+        .toolbar(.hidden, for: .navigationBar)
     }
 }
 
