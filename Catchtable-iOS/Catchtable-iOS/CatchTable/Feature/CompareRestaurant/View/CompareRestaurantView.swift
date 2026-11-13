@@ -43,11 +43,13 @@ struct CompareRestaurantView: View {
             }
             .padding(.top, 20)
             
-            CatchTableButton(title: viewModel.buttonTitle, variant: .filled, action: viewModel.bottomButtonTapped)
-                .padding(.horizontal, 19)
-                .padding(.top, 12)
-                .background(.white)
-                .disabled(!viewModel.isButtonEnabled)
+            if viewModel.showBottomButton {
+                CatchTableButton(title: viewModel.buttonTitle, variant: .filled, action: viewModel.bottomButtonTapped)
+                    .padding(.horizontal, 19)
+                    .padding(.top, 12)
+                    .background(.white)
+                    .disabled(!viewModel.isButtonEnabled)
+            }
         }
         .sheet(isPresented: $viewModel.isSheetPresented, onDismiss: viewModel.sheetDismissed) {
             SetNicknameSheet { name in
@@ -58,4 +60,8 @@ struct CompareRestaurantView: View {
             VoteCompletedView(onShowAfterVote: viewModel.showAfterVote)
         }
     }
+}
+
+#Preview {
+    CompareRestaurantView(role: .host)
 }

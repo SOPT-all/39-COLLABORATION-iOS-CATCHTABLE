@@ -97,6 +97,8 @@ final class CompareRestaurantViewModel {
         }
     }
     
+    var showBottomButton: Bool { !hasVoted }
+    
     func bottomButtonTapped() {
         switch phase {
         case .creating: phase = .voting
