@@ -78,10 +78,12 @@ struct RestaurantDetailView: View {
                 tabSection(detail)
                     .padding(.top, 12)
 
-                aiSection(detail.aiSummary)
-                    .padding(.top, 28)
-                    .padding(.bottom, 74)
+                if let aiSummary = detail.aiSummary {
+                    aiSection(aiSummary)
+                        .padding(.top, 28)
+                }
             }
+            .padding(.bottom, 74)
         }
         .safeAreaInset(edge: .bottom, spacing: 0) {
             RestaurantDetailBottomBar(
