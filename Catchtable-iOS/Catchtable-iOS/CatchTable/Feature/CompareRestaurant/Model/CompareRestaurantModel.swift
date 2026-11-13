@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct CompareRestaurant: Identifiable {
-    let id = UUID()
+    var id: UUID { store.id }
     let store: VoteStore
     let station: SubwayStation
     let menus: [MainMenuInfo]

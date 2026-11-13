@@ -69,21 +69,21 @@ final class CompareRestaurantViewModel {
     
     func isSelected(_ restaurant: CompareRestaurant) -> Bool {
         switch phase {
-        case .creating: candidateIds.contains(restaurant.store.id)
-        case .voting: selectedStoreId == restaurant.store.id
+        case .creating: candidateIds.contains(restaurant.id)
+        case .voting: selectedStoreId == restaurant.id
         }
     }
     
     func voteCount(for restaurant: CompareRestaurant) -> Int {
-        voters[restaurant.store.id]?.count ?? 0
+        voters[restaurant.id]?.count ?? 0
     }
     
     func voterNames(for restaurant: CompareRestaurant) -> [String] {
-        voters[restaurant.store.id] ?? []
+        voters[restaurant.id] ?? []
     }
     
     func select(_ restaurant: CompareRestaurant) {
-        let id = restaurant.store.id
+        let id = restaurant.id
         
         switch phase {
         case .creating:
