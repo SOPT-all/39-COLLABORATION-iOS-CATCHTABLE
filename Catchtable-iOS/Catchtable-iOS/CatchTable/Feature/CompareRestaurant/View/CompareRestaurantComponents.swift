@@ -7,14 +7,6 @@
 
 import SwiftUI
 
-var pinkGradient: LinearGradient {
-    LinearGradient(
-        colors: [.pinkGradientStart, .pinkGradientEnd],
-        startPoint: .top,
-        endPoint: .bottom
-    )
-}
-
 struct VoteStoreCard: View {
     let store: VoteStore
     let isSelected: Bool
@@ -100,12 +92,12 @@ struct AISummaryCard: View {
                     .renderingMode(.template)
                     .resizable()
                     .frame(width: 12, height: 12)
-                    .foregroundStyle(pinkGradient)
+                    .foregroundStyle(LinearGradient.pinkGradient)
                 
                 HStack(alignment: .center, spacing: 4) {
                     Text("AI")
                         .typography(.h3B14)
-                        .foregroundStyle(pinkGradient)
+                        .foregroundStyle(LinearGradient.pinkGradient)
                     
                     Text("요약")
                         .typography(.h3B14)
