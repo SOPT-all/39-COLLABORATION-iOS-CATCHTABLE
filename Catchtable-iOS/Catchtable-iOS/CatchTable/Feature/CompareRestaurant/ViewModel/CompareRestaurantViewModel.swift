@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Observation
 
 enum VoteRole {
     case host
@@ -31,52 +32,12 @@ final class CompareRestaurantViewModel {
     
     var isSheetPresented = false
     var isCompletedPresented = false
-    
-    init(role: VoteRole) {
-        self.role = role
-        self.phase = (role == .host) ? .creating : .voting
-        self.restaurants = CompareRestaurantMockData.restaurants
-        self.candidateIds = Set(restaurants.map { $0.store.id })
-    }
-    
     var isShareButtonVisible: Bool { phase == .voting }
     var isEndVoteButtonVisible: Bool { phase == .voting && role == .host }
-    
     var isCheckboxVisible: Bool { !isVoteResultVisible }
-    
-    func isSelected(_ restaurant: CompareRestaurant) -> Bool {
-        switch phase {
-        case .creating: candidateIds.contains(restaurant.store.id)
-        case .voting: selectedStoreId == restaurant.store.id
-        }
-    }
-    
-    func select(_ restaurant: CompareRestaurant) {
-        let id = restaurant.store.id
-        
-        switch phase {
-        case .creating:
-            if candidateIds.contains(id) {
-                candidateIds.remove(id)
-            } else {
-                candidateIds.insert(id)
-            }
-        case .voting:
-            guard !hasVoted else { return }
-            selectedStoreId = (selectedStoreId == id) ? nil : id
-        }
-    }
     
     var isVoteMemberCardVisible: Bool {
         isVoteResultVisible && voters.values.contains { !$0.isEmpty }
-    }
-    
-    func voteCount(for restaurant: CompareRestaurant) -> Int {
-        voters[restaurant.store.id]?.count ?? 0
-    }
-    
-    func voterNames(for restaurant: CompareRestaurant) -> [String] {
-        voters[restaurant.store.id] ?? []
     }
     
     var voterLines: Int {
@@ -98,6 +59,44 @@ final class CompareRestaurantViewModel {
     }
     
     var isBottomButtonVisible: Bool { !isVoteResultVisible }
+    
+    init(role: VoteRole) {
+        self.role = role
+        self.phase = (role == .host) ? .creating : .voting
+        self.restaurants = CompareRestaurantMockData.restaurants
+        self.candidateIds = Set(restaurants.map { $0.store.id })
+    }
+    
+    func isSelected(_ restaurant: CompareRestaurant) -> Bool {
+        switch phase {
+        case .creating: candidateIds.contains(restaurant.store.id)
+        case .voting: selectedStoreId == restaurant.store.id
+        }
+    }
+    
+    func voteCount(for restaurant: CompareRestaurant) -> Int {
+        voters[restaurant.store.id]?.count ?? 0
+    }
+    
+    func voterNames(for restaurant: CompareRestaurant) -> [String] {
+        voters[restaurant.store.id] ?? []
+    }
+    
+    func select(_ restaurant: CompareRestaurant) {
+        let id = restaurant.store.id
+        
+        switch phase {
+        case .creating:
+            if candidateIds.contains(id) {
+                candidateIds.remove(id)
+            } else {
+                candidateIds.insert(id)
+            }
+        case .voting:
+            guard !hasVoted else { return }
+            selectedStoreId = (selectedStoreId == id) ? nil : id
+        }
+    }
     
     func bottomButtonTapped() {
         switch phase {
