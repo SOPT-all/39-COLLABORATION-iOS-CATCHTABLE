@@ -12,6 +12,8 @@ struct RestaurantDetailView: View {
     @State private var selectedTab: RestaurantDetailTab = .home
     @State private var isBookmarked = false
 
+    @Environment(\.dismiss) private var dismiss
+
     init(
         restaurantID: Int = 1,
         service: any RestaurantDetailServiceProtocol = RestaurantDetailService()
@@ -27,7 +29,7 @@ struct RestaurantDetailView: View {
     var body: some View {
         VStack(spacing: 0) {
             StoreHeader(
-                onBack: { },
+                onBack: { dismiss() },
                 onHome: { },
                 isBookmarked: isBookmarked,
                 onBookmark: { isBookmarked.toggle() }
@@ -36,6 +38,7 @@ struct RestaurantDetailView: View {
             content
         }
         .background(Color.white)
+        .toolbar(.hidden, for: .navigationBar)
         .task {
             await viewModel.load()
         }

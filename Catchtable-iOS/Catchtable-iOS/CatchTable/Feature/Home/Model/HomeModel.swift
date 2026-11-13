@@ -83,14 +83,13 @@ struct HomeRecentStore: Identifiable {
 }
 
 struct HomeSimilarStore: Identifiable {
+    let id: Int
     let name: String
     let area: String
     let category: String
     let rating: String
     let reviewCount: String
     let image: ImageResource
-
-    var id: String { name }
 }
 
 struct HomeFavoriteStore: Identifiable {
@@ -100,6 +99,10 @@ struct HomeFavoriteStore: Identifiable {
     let category: String
     let area: String
     let image: ImageResource
+}
+
+enum HomeRoute: Hashable {
+    case restaurantDetail(id: Int)
 }
 
 enum HomeMockData {
@@ -129,6 +132,7 @@ enum HomeMockData {
 
     static let similarStores = [
         HomeSimilarStore(
+            id: 1,
             name: "하이디라오 서초점",
             area: "강남",
             category: "중식",
@@ -137,6 +141,7 @@ enum HomeMockData {
             image: .imgSimilar01
         ),
         HomeSimilarStore(
+            id: 3,
             name: "하이디라오 가산점",
             area: "가산디지털단지",
             category: "중식",
@@ -145,6 +150,7 @@ enum HomeMockData {
             image: .imgSimilar01
         ),
         HomeSimilarStore(
+            id: 4,
             name: "장관청훠궈 가로수길점",
             area: "가로수길",
             category: "중식",

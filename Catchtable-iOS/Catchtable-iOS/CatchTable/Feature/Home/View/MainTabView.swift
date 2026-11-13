@@ -25,6 +25,12 @@ struct MainTabView: View {
             CatchTableTabBar(selectedTab: $selectedTab)
         }
         .toolbar(.hidden, for: .navigationBar)
+        .navigationDestination(for: HomeRoute.self) { route in
+            switch route {
+            case .restaurantDetail(let id):
+                RestaurantDetailView(restaurantID: id)
+            }
+        }
     }
 }
 
