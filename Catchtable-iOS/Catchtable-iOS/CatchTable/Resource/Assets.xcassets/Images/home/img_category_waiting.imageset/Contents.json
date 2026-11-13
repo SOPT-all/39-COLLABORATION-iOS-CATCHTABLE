@@ -1,0 +1,12 @@
+{
+  "images": [
+    {
+      "filename": "img_category_waiting.png",
+      "idiom": "universal"
+    }
+  ],
+  "info": {
+    "author": "xcode",
+    "version": 1
+  }
+}
