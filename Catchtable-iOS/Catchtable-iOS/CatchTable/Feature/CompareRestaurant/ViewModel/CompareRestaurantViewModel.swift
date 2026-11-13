@@ -76,7 +76,7 @@ final class CompareRestaurantViewModel {
     }
     
     func voterNames(for restaurant: CompareRestaurant) -> [String] {
-        Array(voters[restaurant.store.id] ?? [])
+        voters[restaurant.store.id] ?? []
     }
     
     var voterLines: Int {

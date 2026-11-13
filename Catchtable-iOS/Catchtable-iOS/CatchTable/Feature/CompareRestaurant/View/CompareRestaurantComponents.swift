@@ -209,7 +209,7 @@ struct VoteMemberCard: View {
             
             if voterLines > 0 {
                 VStack(alignment: .leading, spacing: 4) {
-                    ForEach(names, id: \.self) { name in
+                    ForEach(Array(names.enumerated()), id: \.offset) {_, name in
                         VoteMemberRow(name: name)
                     }
                     
