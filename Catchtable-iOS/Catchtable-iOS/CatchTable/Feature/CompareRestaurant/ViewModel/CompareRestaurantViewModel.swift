@@ -39,10 +39,10 @@ final class CompareRestaurantViewModel {
         self.candidateIds = Set(restaurants.map { $0.store.id })
     }
     
-    var showShareButton: Bool { phase == .voting }
-    var showEndVoteButton: Bool { phase == .voting && role == .host }
+    var isShareButtonVisible: Bool { phase == .voting }
+    var isEndVoteButtonVisible: Bool { phase == .voting && role == .host }
     
-    var showCheckbox: Bool { !hasVoted }
+    var isCheckboxVisible: Bool { !hasVoted }
     
     func isSelected(_ restaurant: CompareRestaurant) -> Bool {
         switch phase {
@@ -67,7 +67,7 @@ final class CompareRestaurantViewModel {
         }
     }
     
-    var showVoteMemberCard: Bool {
+    var isVoteMemberCardVisible: Bool {
         voters.values.contains { !$0.isEmpty }
     }
     
@@ -97,7 +97,7 @@ final class CompareRestaurantViewModel {
         }
     }
     
-    var showBottomButton: Bool { !hasVoted }
+    var isBottomButtonVisible: Bool { !hasVoted }
     
     func bottomButtonTapped() {
         switch phase {

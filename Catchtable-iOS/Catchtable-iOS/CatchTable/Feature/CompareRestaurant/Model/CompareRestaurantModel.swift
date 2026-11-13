@@ -36,7 +36,7 @@ struct MainMenuInfo: Identifiable {
     let image: ImageResource
     let name: String
     let price: Int
-    var priceOver: Bool = false
+    var isPriceOver: Bool = false
 }
 
 struct CorkageInfo: Identifiable {
@@ -66,12 +66,12 @@ enum CompareRestaurantMockData {
                     image: .imgHaidilaoMenu1,
                     name: "소기름훠궈",
                     price: 9000,
-                    priceOver: true),
+                    isPriceOver: true),
                 MainMenuInfo(
                     image: .imgHaidilaoMenu2,
                     name: "청유마라훠궈",
                     price: 9000,
-                    priceOver: true)
+                    isPriceOver: true)
             ],
             corkages: [
                 CorkageInfo(type: "와인", price: "5만원"),

@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct VoteStoreCard: View {
+private struct VoteStoreCard: View {
     let store: VoteStore
     let isSelected: Bool
     let showCheckbox: Bool
@@ -64,7 +64,7 @@ struct VoteStoreCard: View {
     }
 }
 
-struct SubwayCard: View {
+private struct SubwayCard: View {
     let station: SubwayStation
     
     var body: some View {
@@ -82,7 +82,7 @@ struct SubwayCard: View {
     }
 }
 
-struct AISummaryCard: View {
+private struct AISummaryCard: View {
     let store: VoteStore
     
     var body: some View {
@@ -112,7 +112,7 @@ struct AISummaryCard: View {
     }
 }
 
-struct PriceRangeCard: View {
+private struct PriceRangeCard: View {
     let store: VoteStore
     
     var body: some View {
@@ -126,7 +126,7 @@ struct PriceRangeCard: View {
     }
 }
 
-struct MainMenuInfoCard: View {
+private struct MainMenuInfoCard: View {
     let info: MainMenuInfo
     
     var body: some View {
@@ -143,7 +143,7 @@ struct MainMenuInfoCard: View {
                     .foregroundStyle(.gray900)
                 
                 HStack(alignment: .center, spacing: 0) {
-                    Text("\(info.price.formatted())원\(info.priceOver ? " ~" : "")")
+                    Text("\(info.price.formatted())원\(info.isPriceOver ? " ~" : "")")
                         .typography(.bodyRg12)
                         .foregroundStyle(.gray500)
                 }
@@ -152,7 +152,7 @@ struct MainMenuInfoCard: View {
     }
 }
 
-struct MainMenuCard: View {
+private struct MainMenuCard: View {
     let menus: [MainMenuInfo]
     var onTap: () -> Void
     
@@ -172,7 +172,7 @@ struct MainMenuCard: View {
     }
 }
 
-struct CorkageCard: View {
+private struct CorkageCard: View {
     let corkages: [CorkageInfo]
     
     var body: some View {
@@ -190,7 +190,7 @@ struct CorkageCard: View {
     }
 }
 
-struct VoteMemberCard: View {
+private struct VoteMemberCard: View {
     let count: Int
     let names: [String]
     let voterLines: Int
@@ -214,7 +214,7 @@ struct VoteMemberCard: View {
     }
 }
 
-struct VoteMemberRow: View {
+private struct VoteMemberRow: View {
     let name: String
     
     var body: some View {
@@ -231,7 +231,7 @@ struct VoteMemberRow: View {
     }
 }
 
-struct CardTitle: View {
+private struct CardTitle: View {
     let title: String
     
     var body: some View {
@@ -309,7 +309,7 @@ struct HalfContainer: View {
     }
 }
 
-struct CardDivider: View {
+private struct CardDivider: View {
     var isGray: Bool
     
     var body: some View {

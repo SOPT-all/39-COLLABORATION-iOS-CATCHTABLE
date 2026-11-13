@@ -18,8 +18,8 @@ struct CompareRestaurantView: View {
         VStack(spacing: 0) {
             VoteHeader(
                 onBack: {},
-                onEndVote: viewModel.showEndVoteButton ? { viewModel.endVote() } : nil,
-                onShare: viewModel.showShareButton ? {} : nil
+                onEndVote: viewModel.isEndVoteButtonVisible ? { viewModel.endVote() } : nil,
+                onShare: viewModel.isShareButtonVisible ? {} : nil
             )
             
             ScrollView {
@@ -28,9 +28,9 @@ struct CompareRestaurantView: View {
                         HalfContainer(
                             restaurant: restaurant,
                             isSelected: viewModel.isSelected(restaurant),
-                            showCheckbox: viewModel.showCheckbox,
+                            showCheckbox: viewModel.isCheckboxVisible,
                             onSelect: { viewModel.select(restaurant) },
-                            showVoteMemberCard: viewModel.showVoteMemberCard,
+                            showVoteMemberCard: viewModel.isVoteMemberCardVisible,
                             voteCount: viewModel.voteCount(for: restaurant),
                             voterNames: viewModel.voterNames(for: restaurant),
                             voterLines: viewModel.voterLines,
@@ -43,7 +43,7 @@ struct CompareRestaurantView: View {
             }
             .padding(.top, 20)
             
-            if viewModel.showBottomButton {
+            if viewModel.isBottomButtonVisible {
                 CatchTableButton(title: viewModel.buttonTitle, variant: .filled, action: viewModel.bottomButtonTapped)
                     .padding(.horizontal, 19)
                     .padding(.top, 12)
