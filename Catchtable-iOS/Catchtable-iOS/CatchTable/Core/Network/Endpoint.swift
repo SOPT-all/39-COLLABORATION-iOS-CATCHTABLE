@@ -10,12 +10,12 @@ import Foundation
 protocol Endpoint {
     var path: String { get }
     var method: HTTPMethod { get }
-    var queryItems: [URLQueryItem]? { get }
+    var queryItems: [URLQueryItem] { get }
     var body: (any Encodable)? { get }
 }
 
 extension Endpoint {
-    var queryItems: [URLQueryItem]? { nil }
+    var queryItems: [URLQueryItem] { [] }
     var body: (any Encodable)? { nil }
 
     func makeURLRequest(baseURL: URL, headers: [String: String]) throws -> URLRequest {
@@ -23,7 +23,9 @@ extension Endpoint {
             url: baseURL.appending(path: path),
             resolvingAgainstBaseURL: false
         )
-        components?.queryItems = queryItems
+        if !queryItems.isEmpty {
+            components?.queryItems = queryItems
+        }
 
         guard let url = components?.url else { throw NetworkError.invalidURL }
 

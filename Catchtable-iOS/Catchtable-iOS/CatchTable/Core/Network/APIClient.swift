@@ -9,6 +9,7 @@ import Foundation
 
 protocol APIClientProtocol {
     func request<Response: Decodable>(_ endpoint: some Endpoint) async throws -> Response
+    func request(_ endpoint: some Endpoint) async throws
 }
 
 final class APIClient {
@@ -35,10 +36,42 @@ final class APIClient {
         return headers
     }
 
+    private func send<Response: Decodable>(
+        _ endpoint: some Endpoint
+    ) async throws -> BaseResponse<Response> {
+        guard let baseURL else { throw NetworkError.invalidBaseURL }
+
+        let request = try endpoint.makeURLRequest(baseURL: baseURL, headers: defaultHeaders)
+        let (data, response) = try await perform(request)
+
+        guard let httpResponse = response as? HTTPURLResponse else {
+            throw NetworkError.invalidResponse
+        }
+
+        return try decode(data, httpResponse: httpResponse)
+    }
+
+    private func perform(_ request: URLRequest) async throws -> (Data, URLResponse) {
+        do {
+            return try await session.data(for: request)
+        } catch let error as URLError {
+            switch error.code {
+            case .notConnectedToInternet, .networkConnectionLost:
+                throw NetworkError.networkConnection
+            case .timedOut:
+                throw NetworkError.timeout
+            case .cancelled:
+                throw CancellationError()
+            default:
+                throw NetworkError.transportFailed(error)
+            }
+        }
+    }
+
     private func decode<Response: Decodable>(
         _ data: Data,
         httpResponse: HTTPURLResponse
-    ) throws -> Response {
+    ) throws -> BaseResponse<Response> {
         let baseResponse: BaseResponse<Response>
         do {
             baseResponse = try decoder.decode(BaseResponse<Response>.self, from: data)
@@ -47,7 +80,7 @@ final class APIClient {
                 throw NetworkError.server(
                     statusCode: httpResponse.statusCode,
                     code: .unknown,
-                    message: HTTPURLResponse.localizedString(forStatusCode: httpResponse.statusCode)
+                    message: ""
                 )
             }
             throw NetworkError.decodingFailed(error)
@@ -61,30 +94,19 @@ final class APIClient {
             )
         }
 
-        guard let responseData = baseResponse.data else { throw NetworkError.emptyData }
-        return responseData
+        return baseResponse
     }
 }
 
 extension APIClient: APIClientProtocol {
     func request<Response: Decodable>(_ endpoint: some Endpoint) async throws -> Response {
-        guard let baseURL else { throw NetworkError.invalidBaseURL }
+        let response: BaseResponse<Response> = try await send(endpoint)
+        guard let data = response.data else { throw NetworkError.emptyData }
+        return data
+    }
 
-        let request = try endpoint.makeURLRequest(baseURL: baseURL, headers: defaultHeaders)
-
-        let data: Data
-        let response: URLResponse
-        do {
-            (data, response) = try await session.data(for: request)
-        } catch {
-            throw NetworkError.transportFailed(error)
-        }
-
-        guard let httpResponse = response as? HTTPURLResponse else {
-            throw NetworkError.invalidResponse
-        }
-
-        return try decode(data, httpResponse: httpResponse)
+    func request(_ endpoint: some Endpoint) async throws {
+        let _: BaseResponse<EmptyData> = try await send(endpoint)
     }
 }
 
