@@ -312,7 +312,7 @@ struct RestaurantAISummaryTitle: View {
             HStack(spacing: 2) {
                 HStack(spacing: 0) {
                     Text("AI")
-                        .foregroundStyle(LinearGradient.aiGradient)
+                        .foregroundStyle(LinearGradient.pinkGradient)
 
                     Text("가 요약했어요")
                         .foregroundStyle(.gray900)
@@ -363,7 +363,7 @@ struct RestaurantAISummaryCard: View {
         )
         .overlay {
             RoundedRectangle(cornerRadius: 14)
-                .strokeBorder(LinearGradient.aiGradient, lineWidth: 1)
+                .strokeBorder(LinearGradient.pinkGradient, lineWidth: 1)
         }
         .shadow(color: .black.opacity(0.06), radius: 4)
     }
@@ -432,12 +432,4 @@ private extension Image {
         resizable()
             .frame(width: size, height: size)
     }
-}
-
-private extension LinearGradient {
-    static let aiGradient = LinearGradient(
-        colors: [.aiGradientStart, .aiGradientEnd],
-        startPoint: .top,
-        endPoint: .bottom
-    )
 }
