@@ -11,8 +11,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		9431F0A1309B300000C0F1A0 /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		9431EFAE309B0E980002CF5E /* Catchtable-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Catchtable-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9431F0A1309B300000C0F1A0 /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -24,8 +24,6 @@
 				CatchTable/Feature/Home/Network/DTO/.gitkeep,
 				CatchTable/Feature/Home/View/.gitkeep,
 				CatchTable/Feature/Home/ViewModel/.gitkeep,
-				CatchTable/Feature/RestaurantDetail/Model/.gitkeep,
-				CatchTable/Feature/RestaurantDetail/Network/DTO/.gitkeep,
 				CatchTable/Feature/RestaurantDetail/View/.gitkeep,
 				CatchTable/Feature/RestaurantDetail/ViewModel/.gitkeep,
 				Info.plist,
