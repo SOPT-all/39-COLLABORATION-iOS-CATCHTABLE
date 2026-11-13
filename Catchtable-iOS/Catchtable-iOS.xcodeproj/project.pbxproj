@@ -11,7 +11,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		9431F0A1309B300000C0F1A0 /* Base.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Base.xcconfig; sourceTree = "<group>"; };
+		9431F0A1309B300000C0F1A0 /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		9431EFAE309B0E980002CF5E /* Catchtable-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Catchtable-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -59,7 +59,7 @@
 		9431EFA5309B0E980002CF5E = {
 			isa = PBXGroup;
 			children = (
-				9431F0A1309B300000C0F1A0 /* Base.xcconfig */,
+				9431F0A1309B300000C0F1A0 /* Config.xcconfig */,
 				9431EFB0309B0E980002CF5E /* Catchtable-iOS */,
 				9431EFAF309B0E980002CF5E /* Products */,
 			);
@@ -283,7 +283,7 @@
 		};
 		9431EFBA309B0E980002CF5E /* Debug configuration for PBXNativeTarget "Catchtable-iOS" */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9431F0A1309B300000C0F1A0 /* Base.xcconfig */;
+			baseConfigurationReference = 9431F0A1309B300000C0F1A0 /* Config.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -317,7 +317,7 @@
 		};
 		9431EFBB309B0E980002CF5E /* Release configuration for PBXNativeTarget "Catchtable-iOS" */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9431F0A1309B300000C0F1A0 /* Base.xcconfig */;
+			baseConfigurationReference = 9431F0A1309B300000C0F1A0 /* Config.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
