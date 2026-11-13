@@ -27,7 +27,7 @@ final class CompareRestaurantViewModel {
     private(set) var selectedStoreId: UUID?
     private(set) var voters: [UUID: [String]] = [:]
     private(set) var hasVoted = false
-    private var pendingVote: String?
+    private(set) var isVoteResultVisible = false
     
     var isSheetPresented = false
     var isCompletedPresented = false
@@ -42,7 +42,7 @@ final class CompareRestaurantViewModel {
     var isShareButtonVisible: Bool { phase == .voting }
     var isEndVoteButtonVisible: Bool { phase == .voting && role == .host }
     
-    var isCheckboxVisible: Bool { !hasVoted }
+    var isCheckboxVisible: Bool { !isVoteResultVisible }
     
     func isSelected(_ restaurant: CompareRestaurant) -> Bool {
         switch phase {
@@ -68,7 +68,7 @@ final class CompareRestaurantViewModel {
     }
     
     var isVoteMemberCardVisible: Bool {
-        voters.values.contains { !$0.isEmpty }
+        isVoteResultVisible && voters.values.contains { !$0.isEmpty }
     }
     
     func voteCount(for restaurant: CompareRestaurant) -> Int {
@@ -97,7 +97,7 @@ final class CompareRestaurantViewModel {
         }
     }
     
-    var isBottomButtonVisible: Bool { !hasVoted }
+    var isBottomButtonVisible: Bool { !isVoteResultVisible }
     
     func bottomButtonTapped() {
         switch phase {
@@ -107,27 +107,22 @@ final class CompareRestaurantViewModel {
     }
     
     func vote(name: String) {
-        pendingVote = name
+        guard let id = selectedStoreId else { return }
+        voters[id, default: []].append(name)
+        hasVoted = true
         isSheetPresented = false
     }
     
     func sheetDismissed() {
-        if pendingVote != nil {
+        if hasVoted && !isVoteResultVisible {
             isCompletedPresented = true
         }
     }
     
     func showAfterVote() {
-        applyPendingVote()
-        isCompletedPresented = false
-    }
-    
-    private func applyPendingVote() {
-        guard let id = selectedStoreId, let name = pendingVote else { return }
-        voters[id, default: []].append(name)
+        isVoteResultVisible = true
         selectedStoreId = nil
-        hasVoted = true
-        pendingVote = nil
+        isCompletedPresented = false
     }
     
     func endVote() {
