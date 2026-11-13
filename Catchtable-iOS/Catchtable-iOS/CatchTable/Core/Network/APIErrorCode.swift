@@ -15,6 +15,8 @@ enum APIErrorCode: String {
     case voteClosed = "VOTE_CLOSED"
     case voteCloseForbidden = "VOTE_CLOSE_FORBIDDEN"
     case voteAlreadyClosed = "VOTE_ALREADY_CLOSED"
+    case storeNotFound = "STORE_NOT_FOUND"
+    case internalServerError = "INTERNAL_SERVER_ERROR"
     case unknown
 
     init(code: String) {

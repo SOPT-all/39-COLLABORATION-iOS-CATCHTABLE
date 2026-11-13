@@ -14,7 +14,7 @@ struct RestaurantDetailView: View {
 
     init(
         restaurantID: Int = 1,
-        service: any RestaurantDetailServiceProtocol = MockRestaurantDetailService()
+        service: any RestaurantDetailServiceProtocol = RestaurantDetailService()
     ) {
         _viewModel = State(
             initialValue: RestaurantDetailViewModel(
