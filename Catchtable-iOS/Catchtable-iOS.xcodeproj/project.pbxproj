@@ -25,10 +25,7 @@
 				CatchTable/Feature/CompareRestaurant/View/.gitkeep,
 				CatchTable/Feature/CompareRestaurant/ViewModel/.gitkeep,
 				CatchTable/Feature/Home/Network/DTO/.gitkeep,
-				CatchTable/Feature/RestaurantDetail/Model/.gitkeep,
 				CatchTable/Feature/RestaurantDetail/Network/DTO/.gitkeep,
-				CatchTable/Feature/RestaurantDetail/View/.gitkeep,
-				CatchTable/Feature/RestaurantDetail/ViewModel/.gitkeep,
 				Info.plist,
 			);
 			target = 9431EFAD309B0E980002CF5E /* Catchtable-iOS */;

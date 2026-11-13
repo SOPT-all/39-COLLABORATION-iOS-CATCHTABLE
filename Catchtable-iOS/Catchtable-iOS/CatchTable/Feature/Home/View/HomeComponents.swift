@@ -7,49 +7,6 @@
 
 import SwiftUI
 
-struct HomeHeader: View {
-    var body: some View {
-        HStack(spacing: 0) {
-            Image(.iconCatchtable)
-                .resizable()
-                .frame(width: 24, height: 24)
-
-            Spacer(minLength: 0)
-
-            HStack(spacing: 10) {
-                Image(.iconSearchSm)
-                    .resizable()
-                    .frame(width: 14, height: 14)
-
-                Text("혜택을 검색해보세요!")
-                    .typography(.h3Md14)
-                    .foregroundStyle(.gray400)
-
-                Spacer(minLength: 0)
-            }
-            .padding(.horizontal, 15)
-            .frame(width: 248, height: 38)
-            .background(Color.gray100, in: .capsule)
-            .overlay {
-                Capsule()
-                    .strokeBorder(Color.gray200, lineWidth: 1)
-            }
-
-            Spacer(minLength: 0)
-
-            HStack(spacing: 6) {
-                Image(.iconHistoryDefault)
-                    .resizable()
-                    .frame(width: 24, height: 24)
-
-                Image(.iconNotificationDefault)
-                    .resizable()
-                    .frame(width: 24, height: 24)
-            }
-        }
-    }
-}
-
 struct HomeSectionTitle: View {
     let title: String
 
