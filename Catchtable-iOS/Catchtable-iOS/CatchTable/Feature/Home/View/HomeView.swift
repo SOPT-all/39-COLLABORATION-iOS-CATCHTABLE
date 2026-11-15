@@ -12,10 +12,8 @@ struct HomeView: View {
     @State private var selectedTab: TopTab = .ranking
     @State private var selectedRecentStoreID: HomeRecentStore.ID?
 
-    init(voteRestaurantCount: Int? = nil) {
-        _viewModel = State(
-            initialValue: HomeViewModel(voteRestaurantCount: voteRestaurantCount)
-        )
+    init(service: any HomeServiceProtocol = HomeService()) {
+        _viewModel = State(initialValue: HomeViewModel(service: service))
     }
 
     private var currentRecentStoreID: HomeRecentStore.ID? {
@@ -36,11 +34,14 @@ struct HomeView: View {
         }
         .background(Color.white)
         .overlay(alignment: .bottom) {
-            if let voteRestaurantCount = viewModel.voteRestaurantCount {
-                VoteFloatingBar(restaurantCount: voteRestaurantCount) { }
+            if let activeVote = viewModel.activeVote {
+                VoteFloatingBar(restaurantCount: activeVote.candidateCount) { }
                     .padding(.horizontal, 20)
                     .padding(.bottom, 81)
             }
+        }
+        .task {
+            await viewModel.fetchMyActiveVote()
         }
     }
 
