@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct CompareRestaurant: Identifiable {
-    var id: UUID { store.id }
+    var id: Int { store.id }
     let store: VoteStore
     let station: SubwayStation
     let menus: [MainMenuInfo]
@@ -16,7 +16,7 @@ struct CompareRestaurant: Identifiable {
 }
 
 struct VoteStore: Identifiable {
-    let id = UUID()
+    let id: Int
     let image: ImageResource
     let name: String
     let rating: String
@@ -32,7 +32,7 @@ struct SubwayStation {
 }
 
 struct MainMenuInfo: Identifiable {
-    let id = UUID()
+    let id: Int
     let image: ImageResource
     let name: String
     let price: Int
@@ -40,7 +40,7 @@ struct MainMenuInfo: Identifiable {
 }
 
 struct CorkageInfo: Identifiable {
-    let id = UUID()
+    let id: String { type }
     let type: String
     let price: String
 }
@@ -49,6 +49,7 @@ enum CompareRestaurantMockData {
     static let restaurants = [
         CompareRestaurant(
             store: VoteStore(
+                id: 1,
                 image: .imgHaidilao148,
                 name: "하이디라오 서초점",
                 rating: "4.7",
@@ -63,11 +64,13 @@ enum CompareRestaurantMockData {
             ),
             menus: [
                 MainMenuInfo(
+                    id: 1,
                     image: .imgHaidilaoMenu1,
                     name: "소기름훠궈",
                     price: 9000,
                     isPriceOver: true),
                 MainMenuInfo(
+                    id: 2,
                     image: .imgHaidilaoMenu2,
                     name: "청유마라훠궈",
                     price: 9000,
@@ -81,6 +84,7 @@ enum CompareRestaurantMockData {
         ),
         CompareRestaurant(
             store: VoteStore(
+                id: 2,
                 image: .imgSoboki,
                 name: "소보키 강남점",
                 rating: "4.5",
@@ -95,11 +99,13 @@ enum CompareRestaurantMockData {
             ),
             menus: [
                 MainMenuInfo(
+                    id: 3,
                     image: .imgSobokiMenu1,
                     name: "선비진 SET",
                     price: 69000
                 ),
                 MainMenuInfo(
+                    id: 4,
                     image: .imgSobokiMenu2,
                     name: "문경바람 SET",
                     price: 49000
