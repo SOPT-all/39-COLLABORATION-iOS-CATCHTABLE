@@ -72,6 +72,11 @@ struct HomeArea: Identifiable {
     var id: String { title }
 }
 
+struct HomeActiveVote {
+    let id: Int
+    let candidateCount: Int
+}
+
 struct HomeRecentStore: Identifiable {
     let name: String
     let area: String
