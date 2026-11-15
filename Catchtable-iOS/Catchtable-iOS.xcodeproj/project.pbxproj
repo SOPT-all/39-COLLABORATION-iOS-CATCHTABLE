@@ -21,7 +21,6 @@
 			membershipExceptions = (
 				CatchTable/DesignSystem/Modifier/.gitkeep,
 				CatchTable/Feature/Home/Model/.gitkeep,
-				CatchTable/Feature/Home/Network/DTO/.gitkeep,
 				CatchTable/Feature/Home/View/.gitkeep,
 				CatchTable/Feature/Home/ViewModel/.gitkeep,
 				CatchTable/Feature/RestaurantDetail/Model/.gitkeep,
