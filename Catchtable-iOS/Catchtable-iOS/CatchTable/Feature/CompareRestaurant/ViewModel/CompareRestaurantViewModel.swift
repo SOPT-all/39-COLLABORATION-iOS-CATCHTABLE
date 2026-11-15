@@ -22,13 +22,18 @@ enum VotePhase {
 final class CompareRestaurantViewModel {
     let role: VoteRole
     
+    private let voteService: VoteServiceProtocol
+    
     private(set) var phase: VotePhase
     private(set) var restaurants: [CompareRestaurant] = []
-    private(set) var candidateIds: Set<UUID> = []
-    private(set) var selectedStoreId: UUID?
-    private(set) var voters: [UUID: [String]] = [:]
+    private(set) var candidateIds: Set<Int> = []
+    private(set) var selectedStoreId: Int?
+    private(set) var voters: [Int: [String]] = [:]
     private(set) var hasVoted = false
     private(set) var isVoteResultVisible = false
+    private(set) var voteId: Int?
+    private(set) var errorMessage: String?
+    private(set) var isCreatingVote = false
     
     var isSheetPresented = false
     var isCompletedPresented = false
@@ -53,15 +58,16 @@ final class CompareRestaurantViewModel {
     
     var isButtonEnabled: Bool {
         switch phase {
-        case .creating: candidateIds.count >= 2
+        case .creating: candidateIds.count == 2 && !isCreatingVote
         case .voting: selectedStoreId != nil
         }
     }
     
     var isBottomButtonVisible: Bool { !isVoteResultVisible }
     
-    init(role: VoteRole) {
+    init(role: VoteRole, voteService: VoteServiceProtocol = VoteService()) {
         self.role = role
+        self.voteService = voteService
         self.phase = (role == .host) ? .creating : .voting
         self.restaurants = CompareRestaurantMockData.restaurants
         self.candidateIds = Set(restaurants.map { $0.store.id })
@@ -100,7 +106,7 @@ final class CompareRestaurantViewModel {
     
     func bottomButtonTapped() {
         switch phase {
-        case .creating: phase = .voting
+        case .creating: Task { await createVote() }
         case .voting: isSheetPresented = true
         }
     }
@@ -122,6 +128,21 @@ final class CompareRestaurantViewModel {
         isVoteResultVisible = true
         selectedStoreId = nil
         isCompletedPresented = false
+    }
+    
+    private func createVote() async {
+        guard isButtonEnabled, phase == .creating else { return }
+        isCreatingVote = true
+        defer { isCreatingVote = false }
+        
+        let storeIDs = restaurants.map(\.id).filter { candidateIds.contains($0) }
+        
+        do {
+            voteId = try await voteService.createVote(storeIDs: storeIDs)
+            phase = .voting
+        } catch {
+            errorMessage = error.localizedDescription
+        }
     }
     
     func endVote() {

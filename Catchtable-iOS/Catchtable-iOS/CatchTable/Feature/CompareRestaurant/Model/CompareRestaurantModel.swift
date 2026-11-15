@@ -40,7 +40,7 @@ struct MainMenuInfo: Identifiable {
 }
 
 struct CorkageInfo: Identifiable {
-    let id: String { type }
+    var id: String { type }
     let type: String
     let price: String
 }
