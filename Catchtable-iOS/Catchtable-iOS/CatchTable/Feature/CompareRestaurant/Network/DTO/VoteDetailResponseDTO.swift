@@ -15,7 +15,7 @@ struct VoteDetailResponseDTO: Decodable {
     let viewer: Viewer
     let createdAt: String
     let closedAt: String?
-
+    
     enum CodingKeys: String, CodingKey {
         case status, participantCount, candidates, viewer, createdAt, closedAt
         case voteID = "voteId"
@@ -29,17 +29,17 @@ extension VoteDetailResponseDTO {
         let voteCount: Int
         let voters: [Voter]
         let store: Store
-
+        
         enum CodingKeys: String, CodingKey {
             case displayOrder, voteCount, voters, store
             case candidateID = "candidateId"
         }
     }
-
+    
     struct Voter: Decodable {
         let displayName: String
     }
-
+    
     struct Store: Decodable {
         let storeID: Int
         let name: String
@@ -51,7 +51,7 @@ extension VoteDetailResponseDTO {
         let priceRange: String
         let representativeMenus: [Menu]
         let amenities: [Amenity]
-
+        
         enum CodingKeys: String, CodingKey {
             case name, rating, reviewCount, station, aiSummary
             case priceRange, representativeMenus, amenities
@@ -59,18 +59,18 @@ extension VoteDetailResponseDTO {
             case imageURLs = "imageUrls"
         }
     }
-
+    
     struct Station: Decodable {
         let name: String
         let lines: [String]
         let distanceMeters: Int
     }
-
+    
     struct AISummary: Decodable {
         let title: String
         let lines: [String]
     }
-
+    
     struct Menu: Decodable {
         let menuID: Int
         let name: String
@@ -78,19 +78,19 @@ extension VoteDetailResponseDTO {
         let isPriceFrom: Bool
         let imageURL: String
         let displayOrder: Int
-
+        
         enum CodingKeys: String, CodingKey {
             case name, price, isPriceFrom, displayOrder
             case menuID = "menuId"
             case imageURL = "imageUrl"
         }
     }
-
+    
     struct Amenity: Decodable {
         let category: String
         let content: String
     }
-
+    
     struct Viewer: Decodable {
         let userID: Int
         let isHost: Bool
@@ -98,7 +98,7 @@ extension VoteDetailResponseDTO {
         let selectedCandidateID: Int?
         let displayName: String?
         let defaultNickname: String
-
+        
         enum CodingKeys: String, CodingKey {
             case isHost, hasVoted, displayName, defaultNickname
             case userID = "userId"
@@ -156,13 +156,43 @@ private extension VoteDetailResponseDTO.Store {
     }
 }
 
+// TODO: 주희언니 코드 머지 후 변경
+//private extension VoteDetailResponseDTO.Station {
+//    func toModel() -> SubwayStation {
+//        SubwayStation(
+//            lines: lines.compactMap(Line.init(name:)),
+//            name: name,
+//            distance: distanceMeters
+//        )
+//    }
+//}
+
 private extension VoteDetailResponseDTO.Station {
     func toModel() -> SubwayStation {
         SubwayStation(
-            lines: lines.compactMap(Line.init(name:)),
+            lines: lines.compactMap(Self.line(from:)),
             name: name,
             distance: distanceMeters
         )
+    }
+    
+    static func line(from name: String) -> Line? {
+        switch name {
+        case "1": .line1
+        case "2": .line2
+        case "3": .line3
+        case "4": .line4
+        case "5": .line5
+        case "6": .line6
+        case "7": .line7
+        case "8": .line8
+        case "9": .line9
+        case "신분당": .lineShinbundang
+        case "수인분당": .lineSuinbundang
+        case "경춘": .lineGyeongchun
+        case "경의중앙": .lineGyeonguijungang
+        default: nil
+        }
     }
 }
 
