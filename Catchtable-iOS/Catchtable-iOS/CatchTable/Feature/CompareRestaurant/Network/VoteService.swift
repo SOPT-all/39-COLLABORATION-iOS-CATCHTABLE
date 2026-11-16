@@ -9,6 +9,7 @@ protocol VoteServiceProtocol {
     func createVote(storeIDs: [Int]) async throws -> Int
     func fetchVoteDetail(voteID: Int) async throws -> VoteDetail
     func submitBallot(voteID: Int, candidateID: Int, nickname: String) async throws -> VoteDetail
+    func closeVote(voteID: Int) async throws -> VoteDetail
 }
 
 final class VoteService {
@@ -40,6 +41,13 @@ extension VoteService: VoteServiceProtocol {
                 voteID: voteID,
                 request: SubmitBallotRequestDTO(candidateID: candidateID, nickname: nickname)
             )
+        )
+        return response.toModel()
+    }
+    
+    func closeVote(voteID: Int) async throws -> VoteDetail {
+        let response: VoteDetailResponseDTO = try await apiClient.request(
+            VoteEndpoint.close(voteID: voteID)
         )
         return response.toModel()
     }
