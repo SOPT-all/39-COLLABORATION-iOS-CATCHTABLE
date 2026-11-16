@@ -143,6 +143,7 @@ private struct MainMenuInfoCard: View {
                     .foregroundStyle(.gray500)
             }
         }
+        .frame(width: 68, alignment: .leading)
     }
 }
 
@@ -155,7 +156,7 @@ private struct MainMenuCard: View {
             CardTitle(title: "대표 메뉴")
             
             HStack(alignment: .top, spacing: 12) {
-                ForEach(menus) { menu in
+                ForEach(menus.prefix(2)) { menu in
                     MainMenuInfoCard(info: menu)
                 }
             }
@@ -175,7 +176,7 @@ private struct CorkageCard: View {
             
             VStack(alignment: .leading, spacing: 2) {
                 ForEach(corkages) { corkage in
-                    Text("- \(corkage.content)")
+                    Text(corkage.content)
                         .typography(.bodyRg12)
                         .foregroundStyle(.gray600)
                 }
