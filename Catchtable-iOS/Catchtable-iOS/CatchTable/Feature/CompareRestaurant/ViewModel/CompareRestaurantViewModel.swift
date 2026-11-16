@@ -37,6 +37,7 @@ final class CompareRestaurantViewModel {
     private(set) var isCreatingVote = false
     private(set) var voteDetail: VoteDetail?
     private(set) var isSubmittingVote = false
+    private(set) var isClosingVote = false
     private var pendingErrorMessage: String?
     
     var isErrorAlertPresented = false
@@ -169,7 +170,9 @@ final class CompareRestaurantViewModel {
     }
     
     func endVote() {
-        // TODO: API
+        guard !isClosingVote, let voteId else { return }
+        isClosingVote = true
+        Task { await closeVote(voteID: voteId) }
     }
 }
 
@@ -243,6 +246,24 @@ private extension CompareRestaurantViewModel {
         } catch {
             pendingErrorMessage = error.localizedDescription
             isSheetPresented = false
+        }
+    }
+    
+    func closeVote(voteID: Int) async {
+        defer { isClosingVote = false }
+
+        do {
+            let detail = try await voteService.closeVote(voteID: voteID)
+            apply(detail)
+            selectedStoreId = nil
+            isVoteResultVisible = true
+        } catch is CancellationError {
+            return
+        } catch let NetworkError.server(_, code, message) where code == .voteAlreadyClosed {
+            showError(message)
+            await fetchVoteDetail(voteID: voteID)
+        } catch {
+            showError(error.localizedDescription)
         }
     }
 }
