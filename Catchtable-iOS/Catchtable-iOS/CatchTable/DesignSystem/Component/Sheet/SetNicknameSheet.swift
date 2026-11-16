@@ -14,7 +14,7 @@ enum NameType {
 
 struct SetNicknameSheet: View {
     @State private var nameType: NameType? = nil
-    @State private var nickname: String = "우수한 셀럽_121"
+    @State private var nickname: String
     
     let onVote: (String) -> Void
     private let maxCount: Int = 12
@@ -24,6 +24,12 @@ struct SetNicknameSheet: View {
     private var countColor: Color {
         if inputCount == 0 { return .gray400 }
         return isCountFull ? .orangeBase : .gray900
+    }
+    
+    init(defaultNickname: String = "", onVote: @escaping (String) -> Void) {
+        let initial = defaultNickname.isEmpty ? "우수한 셀럽_121" : defaultNickname
+        _nickname = State(initialValue: String(initial.prefix(12)))
+        self.onVote = onVote
     }
     
     var body: some View {

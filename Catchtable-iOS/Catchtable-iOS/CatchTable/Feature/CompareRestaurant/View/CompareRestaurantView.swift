@@ -52,7 +52,7 @@ struct CompareRestaurantView: View {
             }
         }
         .sheet(isPresented: $viewModel.isSheetPresented, onDismiss: viewModel.sheetDismissed) {
-            SetNicknameSheet { name in
+            SetNicknameSheet(defaultNickname: viewModel.defaultNickname) { name in
                 viewModel.vote(name: name)
             }
         }
