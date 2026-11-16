@@ -36,8 +36,10 @@ final class CompareRestaurantViewModel {
     private(set) var errorMessage: String?
     private(set) var isCreatingVote = false
     private(set) var voteDetail: VoteDetail?
-    var isErrorAlertPresented = false
+    private(set) var isSubmittingVote = false
+    private var pendingErrorMessage: String?
     
+    var isErrorAlertPresented = false
     var isSheetPresented = false
     var isCompletedPresented = false
     var isShareButtonVisible: Bool { phase == .voting }
@@ -127,13 +129,29 @@ final class CompareRestaurantViewModel {
     }
     
     func vote(name: String) {
-        guard let id = selectedStoreId else { return }
-        voters[id, default: []].append(name)
-        hasVoted = true
-        isSheetPresented = false
+        guard !isSubmittingVote, let id = selectedStoreId else { return }
+
+        guard let voteId else {
+            voters[id, default: []].append(name)
+            hasVoted = true
+            isSheetPresented = false
+            return
+        }
+
+        guard let candidateID = restaurants.first(where: { $0.id == id })?.candidateID else { return }
+        let nickname = name.trimmingCharacters(in: .whitespaces)
+
+        isSubmittingVote = true
+        
+        Task { await submitBallot(voteID: voteId, candidateID: candidateID, nickname: nickname) }
     }
     
     func sheetDismissed() {
+        if let pendingErrorMessage {
+            self.pendingErrorMessage = nil
+            showError(pendingErrorMessage)
+            return
+        }
         if hasVoted && !isVoteResultVisible {
             isCompletedPresented = true
         }
@@ -179,6 +197,7 @@ private extension CompareRestaurantViewModel {
         do {
             let detail = try await voteService.fetchVoteDetail(voteID: voteID)
             apply(detail)
+            isVoteResultVisible = detail.viewer.hasVoted || !detail.isOpen
         } catch is CancellationError {
             return
         } catch {
@@ -196,11 +215,34 @@ private extension CompareRestaurantViewModel {
             uniquingKeysWith: { first, _ in first }
         )
         hasVoted = detail.viewer.hasVoted
-        isVoteResultVisible = detail.viewer.hasVoted || !detail.isOpen
     }
 
     func showError(_ message: String) {
         errorMessage = message
         isErrorAlertPresented = true
+    }
+    
+    func submitBallot(voteID: Int, candidateID: Int, nickname: String) async {
+        defer { isSubmittingVote = false }
+
+        do {
+            let detail = try await voteService.submitBallot(
+                voteID: voteID,
+                candidateID: candidateID,
+                nickname: nickname
+            )
+            apply(detail)
+            isSheetPresented = false
+        } catch is CancellationError {
+            return
+        } catch let NetworkError.server(_, code, message)
+            where code == .alreadyVoted || code == .voteClosed {
+            pendingErrorMessage = message
+            isSheetPresented = false
+            await fetchVoteDetail(voteID: voteID)
+        } catch {
+            pendingErrorMessage = error.localizedDescription
+            isSheetPresented = false
+        }
     }
 }
