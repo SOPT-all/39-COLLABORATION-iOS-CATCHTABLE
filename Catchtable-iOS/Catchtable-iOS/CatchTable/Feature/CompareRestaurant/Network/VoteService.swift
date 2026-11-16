@@ -7,6 +7,7 @@
 
 protocol VoteServiceProtocol {
     func createVote(storeIDs: [Int]) async throws -> Int
+    func fetchVoteDetail(voteID: Int) async throws -> VoteDetail
 }
 
 final class VoteService {
@@ -23,5 +24,12 @@ extension VoteService: VoteServiceProtocol {
             VoteEndpoint.create(CreateVoteRequestDTO(storeIDs: storeIDs))
         )
         return response.voteID
+    }
+    
+    func fetchVoteDetail(voteID: Int) async throws -> VoteDetail {
+        let response: VoteDetailResponseDTO = try await apiClient.request(
+            VoteEndpoint.fetchDetail(voteID: voteID)
+        )
+        return response.toModel()
     }
 }
