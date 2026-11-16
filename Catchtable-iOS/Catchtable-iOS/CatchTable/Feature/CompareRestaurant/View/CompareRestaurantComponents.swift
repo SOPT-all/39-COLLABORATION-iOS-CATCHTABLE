@@ -17,9 +17,7 @@ private struct VoteStoreCard: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 4) {
             ZStack(alignment: .topTrailing) {
-                Image(store.image)
-                    .resizable()
-                    .scaledToFill()
+                StoreImage(source: store.image)
                     .frame(width: 148, height: 148)
                     .clipShape(.rect(cornerRadius: 16))
                 
@@ -131,9 +129,7 @@ private struct MainMenuInfoCard: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
-            Image(info.image)
-                .resizable()
-                .scaledToFill()
+            StoreImage(source: info.image)
                 .frame(width: 68, height: 68)
                 .clipShape(.rect(cornerRadius: 8))
             
@@ -147,6 +143,7 @@ private struct MainMenuInfoCard: View {
                     .foregroundStyle(.gray500)
             }
         }
+        .frame(width: 68, alignment: .leading)
     }
 }
 
@@ -159,7 +156,7 @@ private struct MainMenuCard: View {
             CardTitle(title: "대표 메뉴")
             
             HStack(alignment: .top, spacing: 12) {
-                ForEach(menus) { menu in
+                ForEach(menus.prefix(2)) { menu in
                     MainMenuInfoCard(info: menu)
                 }
             }
@@ -179,7 +176,7 @@ private struct CorkageCard: View {
             
             VStack(alignment: .leading, spacing: 2) {
                 ForEach(corkages) { corkage in
-                    Text("- \(corkage.type): 병당 \(corkage.price)")
+                    Text(corkage.content)
                         .typography(.bodyRg12)
                         .foregroundStyle(.gray600)
                 }
@@ -315,5 +312,28 @@ private struct CardDivider: View {
             .fill(isGray ? .white : .gray200)
             .frame(maxWidth: .infinity)
             .frame(height: 1)
+    }
+}
+
+private struct StoreImage: View {
+    let source: RestaurantImageSource?
+
+    var body: some View {
+        switch source {
+        case .asset(let resource):
+            Image(resource)
+                .resizable()
+                .scaledToFill()
+        case .remote(let url):
+            AsyncImage(url: url) { image in
+                image
+                    .resizable()
+                    .scaledToFill()
+            } placeholder: {
+                Color.gray100
+            }
+        case nil:
+            Color.gray100
+        }
     }
 }
