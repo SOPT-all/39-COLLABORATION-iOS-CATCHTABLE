@@ -154,7 +154,10 @@ struct HomeView: View {
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(alignment: .top, spacing: 8) {
                     ForEach(viewModel.similarStores) { store in
-                        HomeSimilarStoreCard(store: store)
+                        NavigationLink(value: HomeRoute.restaurantDetail(id: store.id)) {
+                            HomeSimilarStoreCard(store: store)
+                        }
+                        .buttonStyle(.plain)
                     }
                 }
                 .padding(.horizontal, 20)

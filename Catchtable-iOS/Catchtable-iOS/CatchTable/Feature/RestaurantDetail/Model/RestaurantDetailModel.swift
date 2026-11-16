@@ -39,9 +39,11 @@ struct RestaurantMenu: Identifiable {
     let name: String
     let price: Int
     let image: RestaurantImageSource
+    var isPriceFrom = false
 
     var priceText: String {
-        "\(price.formatted(.number.locale(.korean)))원"
+        let text = "\(price.formatted(.number.locale(.korean)))원"
+        return isPriceFrom ? "\(text)~" : text
     }
 }
 
@@ -56,22 +58,21 @@ struct RestaurantDetail {
     let area: String
     let category: String
     let rating: Double
-    let ratingCount: Int
-    let photoCount: Int
     let reviewCount: Int
-    let bookmarkCount: Int
-    let viewerCount: Int
     let photos: [RestaurantPhoto]
     let location: RestaurantLocation
     let priceRange: String
-    let businessStatus: String
-    let lastOrder: String
+    let businessHours: String
     let phoneNumber: String
     let amenities: [RestaurantAmenity]
     let menus: [RestaurantMenu]
-    let aiSummary: RestaurantAISummary
-    let reserveTitle: String
-    let isReservable: Bool
+    let aiSummary: RestaurantAISummary?
+    var photoCount = 12_000
+    var bookmarkCount = 67_000
+    var viewerCount = 75
+    var lastOrder = "새벽 05:00 라스트오더"
+    var reserveTitle = "바로 입장 가능"
+    var isReservable = false
 
     private static let tenThousand = 10_000
 
@@ -79,8 +80,8 @@ struct RestaurantDetail {
         String(format: "%.1f", rating)
     }
 
-    var ratingCountText: String {
-        "리뷰 \(ratingCount.formatted(.number.locale(.korean)))개"
+    var reviewCountText: String {
+        "리뷰 \(reviewCount.formatted(.number.locale(.korean)))개"
     }
 
     var viewerCountText: String {
@@ -108,11 +109,7 @@ enum RestaurantDetailMockData {
         area: "강남",
         category: "중식",
         rating: 4.7,
-        ratingCount: 6_139,
-        photoCount: 12_000,
-        reviewCount: 4_122,
-        bookmarkCount: 67_000,
-        viewerCount: 75,
+        reviewCount: 6_139,
         photos: [
             RestaurantPhoto(id: 1, image: .asset(.imgPhoto1)),
             RestaurantPhoto(id: 2, image: .asset(.imgPhoto2))
@@ -123,8 +120,7 @@ enum RestaurantDetailMockData {
             distanceMeters: 221
         ),
         priceRange: "3-5만원",
-        businessStatus: "영업 중",
-        lastOrder: "새벽 05:00 라스트오더",
+        businessHours: "영업 중",
         phoneNumber: "0507-1350-8260",
         amenities: [
             RestaurantAmenity(title: "최대 8명 예약", hasHelp: true),
@@ -162,8 +158,6 @@ enum RestaurantDetailMockData {
                 "소스바에서 입맛에 맞게 소스를 만들어 즐길 수 있으며, 달콤한 케이크도 맛볼 수 있어요.",
                 "자리에서 화려한 면 퍼포먼스를 감상할 수 있고, 생일이나 기념일에 방문하기 좋은 곳이에요."
             ]
-        ),
-        reserveTitle: "바로 입장 가능",
-        isReservable: false
+        )
     )
 }
