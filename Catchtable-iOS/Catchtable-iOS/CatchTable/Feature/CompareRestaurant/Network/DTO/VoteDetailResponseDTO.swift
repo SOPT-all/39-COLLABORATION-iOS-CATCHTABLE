@@ -156,43 +156,13 @@ private extension VoteDetailResponseDTO.Store {
     }
 }
 
-// TODO: 주희언니 코드 머지 후 변경
-//private extension VoteDetailResponseDTO.Station {
-//    func toModel() -> SubwayStation {
-//        SubwayStation(
-//            lines: lines.compactMap(Line.init(name:)),
-//            name: name,
-//            distance: distanceMeters
-//        )
-//    }
-//}
-
 private extension VoteDetailResponseDTO.Station {
     func toModel() -> SubwayStation {
         SubwayStation(
-            lines: lines.compactMap(Self.line(from:)),
+            lines: lines.compactMap(Line.init(name:)),
             name: name,
             distance: distanceMeters
         )
-    }
-    
-    static func line(from name: String) -> Line? {
-        switch name {
-        case "1": .line1
-        case "2": .line2
-        case "3": .line3
-        case "4": .line4
-        case "5": .line5
-        case "6": .line6
-        case "7": .line7
-        case "8": .line8
-        case "9": .line9
-        case "신분당": .lineShinbundang
-        case "수인분당": .lineSuinbundang
-        case "경춘": .lineGyeongchun
-        case "경의중앙": .lineGyeonguijungang
-        default: nil
-        }
     }
 }
 
