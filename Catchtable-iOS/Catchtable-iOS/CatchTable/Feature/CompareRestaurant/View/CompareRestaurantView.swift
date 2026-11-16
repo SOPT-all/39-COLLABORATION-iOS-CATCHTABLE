@@ -10,8 +10,8 @@ import SwiftUI
 struct CompareRestaurantView: View {
     @State private var viewModel: CompareRestaurantViewModel
     
-    init(role: VoteRole) {
-        _viewModel = State(initialValue: CompareRestaurantViewModel(role: role))
+    init(role: VoteRole, voteID: Int? = nil) {
+        _viewModel = State(initialValue: CompareRestaurantViewModel(role: role, voteID: voteID))
     }
     
     var body: some View {
@@ -58,6 +58,14 @@ struct CompareRestaurantView: View {
         }
         .fullScreenCover(isPresented: $viewModel.isCompletedPresented) {
             VoteCompletedView(onShowAfterVote: viewModel.showAfterVote)
+        }
+        .task {
+            await viewModel.load()
+        }
+        .alert("알림", isPresented: $viewModel.isErrorAlertPresented) {
+            Button("확인", role: .cancel) {}
+        } message: {
+            Text(viewModel.errorMessage ?? "")
         }
     }
 }
