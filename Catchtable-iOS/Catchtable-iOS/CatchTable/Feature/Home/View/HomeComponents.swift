@@ -46,7 +46,7 @@ struct HomeCategoryItem: View {
 
             Text(category.title)
                 .typography(.captionMd10)
-                .foregroundStyle(.gray900)
+                .foregroundStyle(.black)
                 .lineLimit(1)
                 .frame(height: 17, alignment: .top)
         }
@@ -134,7 +134,7 @@ struct HomeRecentStoreChip: View {
             .background(Color.white, in: .rect(cornerRadius: 12))
             .overlay {
                 RoundedRectangle(cornerRadius: 12)
-                    .strokeBorder(isSelected ? Color.gray500 : Color.clear, lineWidth: 1)
+                    .strokeBorder(isSelected ? Color.gray500 : Color.gray100, lineWidth: 1)
             }
         }
         .buttonStyle(.plain)
@@ -159,7 +159,7 @@ struct HomeSimilarStoreCard: View {
                     .lineLimit(1)
                     .frame(height: 17)
 
-                HStack(spacing: 2) {
+                HStack(spacing: 3) {
                     Text(store.area)
                         .lineLimit(1)
 

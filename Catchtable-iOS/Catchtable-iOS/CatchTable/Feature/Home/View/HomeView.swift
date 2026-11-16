@@ -48,7 +48,7 @@ struct HomeView: View {
     private var topSheet: some View {
         VStack(spacing: 0) {
             banner
-                .padding(.top, 18)
+                .padding(.top, 16)
                 .padding(.horizontal, 20)
 
             CatchTableTopTabBar(selectedTab: $selectedTab)
@@ -59,8 +59,8 @@ struct HomeView: View {
                     HomeCategoryItem(category: category)
                 }
             }
-            .padding(.top, 23)
-            .padding(.bottom, 24)
+            .padding(.top, 24)
+            .padding(.bottom, 23)
         }
         .frame(maxWidth: .infinity)
         .background(
@@ -96,12 +96,12 @@ struct HomeView: View {
     private var areaSection: some View {
         VStack(alignment: .leading, spacing: 12) {
             HStack {
-                HStack(spacing: 6) {
+                HStack(spacing: 8) {
                     HomeSectionTitle(title: "어디로 가시나요?")
 
                     Image(.iconDestination)
                         .resizable()
-                        .frame(width: 26, height: 26)
+                        .frame(width: 24, height: 24)
                 }
 
                 Spacer(minLength: 0)
