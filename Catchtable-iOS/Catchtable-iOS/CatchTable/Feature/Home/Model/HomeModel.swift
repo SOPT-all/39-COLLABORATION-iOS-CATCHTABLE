@@ -156,7 +156,7 @@ enum HomeMockData {
         ),
         HomeSimilarStore(
             id: 4,
-            name: "장관청훠궈 가로수길점",
+            name: "징관청훠궈 가로수길점",
             area: "가로수길",
             category: "중식",
             rating: "4.6",
