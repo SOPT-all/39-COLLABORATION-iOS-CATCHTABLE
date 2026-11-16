@@ -14,9 +14,19 @@ final class HomeViewModel {
     private(set) var recentStores = HomeMockData.recentStores
     private(set) var similarStores = HomeMockData.similarStores
     private(set) var favoriteStores = HomeMockData.favoriteStores
-    private(set) var voteRestaurantCount: Int?
+    private(set) var activeVote: HomeActiveVote?
 
-    init(voteRestaurantCount: Int? = nil) {
-        self.voteRestaurantCount = voteRestaurantCount
+    private let service: any HomeServiceProtocol
+
+    init(service: any HomeServiceProtocol = HomeService()) {
+        self.service = service
+    }
+
+    func fetchMyActiveVote() async {
+        do {
+            activeVote = try await service.fetchMyActiveVote()
+        } catch {
+            activeVote = nil
+        }
     }
 }

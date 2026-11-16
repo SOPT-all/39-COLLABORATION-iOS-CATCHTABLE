@@ -97,7 +97,7 @@ struct RestaurantSummaryView: View {
                 }
 
                 HStack(spacing: 0) {
-                    Text(detail.ratingCountText)
+                    Text(detail.reviewCountText)
                         .typography(.h3Sb14)
 
                     Image(.iconStoreNext)
@@ -191,7 +191,7 @@ struct RestaurantInfoRows: View {
             HStack(spacing: 4) {
                 HStack(spacing: 8) {
                     rowIcon(.iconTime14)
-                    infoText(detail.businessStatus)
+                    infoText(detail.businessHours)
                 }
 
                 Circle()
