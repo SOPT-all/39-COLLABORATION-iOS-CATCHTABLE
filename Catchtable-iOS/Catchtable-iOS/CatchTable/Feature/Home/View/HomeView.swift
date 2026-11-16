@@ -31,15 +31,15 @@ struct HomeView: View {
                 }
                 .background(Color.gray200)
             }
-        }
-        .background(Color.white)
-        .overlay(alignment: .bottom) {
-            if let activeVote = viewModel.activeVote {
-                VoteFloatingBar(restaurantCount: activeVote.candidateCount) { }
-                    .padding(.horizontal, 20)
-                    .padding(.bottom, 81)
+            .safeAreaInset(edge: .bottom, spacing: 0) {
+                if let activeVote = viewModel.activeVote {
+                    VoteFloatingBar(restaurantCount: activeVote.candidateCount) { }
+                        .padding(.horizontal, 20)
+                        .padding(.bottom, 20)
+                }
             }
         }
+        .background(Color.white)
         .task {
             await viewModel.fetchMyActiveVote()
         }
