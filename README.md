@@ -1,11 +1,53 @@
 # 39-COLLABORATION-iOS-CATCHTABLE
-39기 합동 세미나 모바일 앱 2조 캐치테이블 🍱
+> 39기 합동 세미나 모바일 앱 2조 캐치테이블 🍱
+
+<br>
+<br>
+
+<img width="800" alt="표지" src="https://github.com/user-attachments/assets/fa39c6f3-ccc6-4c6d-99ba-d302848b6a38" />
+
+<img width="800" alt="01 Backgrond _ 메인 개선 플로우" src="https://github.com/user-attachments/assets/46d8e736-4b7a-4aac-a07b-ddc62646146b" />
+
+<br>
+
+#### 🔺 Pain Point 1 ∙ 홈 화면 접속
+과도하게 많은 카테고리가 나열되어 정보 탐색 시 피로감을 유발해요
+
+#### 🔺 Pain Point 2 ∙ 매장 선택 및 담기
+기능 명칭이 직관적이지 않아요
+대표 메뉴 파악이 어려워요
+
+#### 🔺 Pain Point 3 ∙ 투표 생성 및 링크 공유
+투표 페이지에 접근할 수 있는 경로가 제한적이에요
+
+#### 🔺 Pain Point 4 ∙ 각자 투표
+투표할 때마다 이름을 매번 직접 입력해야 해요
+
+#### 🔺 Pain Point 5 ∙ 결과 확인
+투표 결과를 확인하기 위해 외부 링크에 재접속해야 해요
+
+<br>
+
+## Redesign Point
+<img width="800" alt="홈 (Home)" src="https://github.com/user-attachments/assets/36b3d28c-1d69-4013-bdf6-4e5fcf86145f" />
+
+<img width="800" alt="가게 상세정보 (Store)" src="https://github.com/user-attachments/assets/13aa35c1-3a47-463f-ac37-161840e4af21" />
+
+<img width="800" alt="함께 고르기 (Vote)" src="https://github.com/user-attachments/assets/650107d5-9651-4261-9d29-3dc693a01100" />
+
+<img width="800" alt="함께 고르기 (Vote) (1)" src="https://github.com/user-attachments/assets/4abd9e4b-196a-4408-9b89-23e2600c2c0e" />
+
+<br> <br>
+
+---
+
 <br> <br>
 ##  iOS Developer
 | 최주희 | 허다연 |
 | :---: | :---: |
 | `iOS Lead`<br>`Developer` | `iOS Developer` |
 | <img width="150" height="150" alt="image" src="https://github.com/user-attachments/assets/ce14f544-7284-4978-90c1-3bceae67bb48" /> | <img width="150" height="150" alt="image" src="https://github.com/user-attachments/assets/82836271-a29f-4a57-b72c-8af782a9095c" /> |
+| `Home View`<br>`RestaurantDetail View` | `CompareRestaurant View` |
 
 <br>
 
@@ -14,7 +56,10 @@
 ### Language & Library
 ![Swift](https://img.shields.io/badge/-SWIFT-F05138?style=for-the-badge&logo=swift&logoColor=white)
 ![Kingfisher](https://img.shields.io/badge/-KINGFISHER-D9B900?style=for-the-badge)
-<br>
+
+### Architecture
+![MVVM](https://img.shields.io/badge/-MVVM-512BD4?style=for-the-badge&logoColor=white)
+
 ### Network
 ![URLSession](https://img.shields.io/badge/-URLSESSION-000000?style=for-the-badge&logo=apple&logoColor=white)
 
