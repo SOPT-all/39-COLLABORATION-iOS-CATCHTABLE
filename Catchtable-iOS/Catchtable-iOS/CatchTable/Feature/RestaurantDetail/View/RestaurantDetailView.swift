@@ -106,7 +106,7 @@ struct RestaurantDetailView: View {
             )
 
             RestaurantSummaryView(detail: detail) {
-                router.push(.compareRestaurant)
+                router.push(.compareRestaurant(voteID: nil))
             }
             .padding(.horizontal, 20)
 

@@ -31,8 +31,8 @@ struct MainTabView: View {
             switch route {
             case .restaurantDetail(let id):
                 RestaurantDetailView(restaurantID: id)
-            case .compareRestaurant:
-                CompareRestaurantView(role: .host)
+            case .compareRestaurant(let voteID):
+                CompareRestaurantView(role: .host, voteID: voteID)
             }
         }
     }

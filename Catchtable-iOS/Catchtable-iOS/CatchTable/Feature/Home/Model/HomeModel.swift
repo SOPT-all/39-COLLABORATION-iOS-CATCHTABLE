@@ -108,7 +108,7 @@ struct HomeFavoriteStore: Identifiable {
 
 enum HomeRoute: Hashable {
     case restaurantDetail(id: Int)
-    case compareRestaurant
+    case compareRestaurant(voteID: Int?)
 }
 
 enum HomeMockData {
