@@ -18,8 +18,18 @@ struct SetNicknameSheet: View {
     
     let onVote: (String) -> Void
     private let maxCount: Int = 12
+    private static let anonymousName = "익명1"
     private var inputCount: Int { nickname.count }
     private var isCountFull: Bool { inputCount >= maxCount }
+    private var trimmedNickname: String { nickname.trimmingCharacters(in: .whitespaces) }
+
+    private var canVote: Bool {
+        switch nameType {
+        case .anonymous: true
+        case .nickname: !trimmedNickname.isEmpty
+        case nil: false
+        }
+    }
 
     private var countColor: Color {
         if inputCount == 0 { return .gray400 }
@@ -66,9 +76,9 @@ struct SetNicknameSheet: View {
             }
             
             CatchTableButton(title: "이 이름으로 투표하기", variant: .filled) {
-                onVote(nameType == .anonymous ? "익명1" : nickname)
+                onVote(nameType == .anonymous ? Self.anonymousName : trimmedNickname)
             }
-            .disabled(nickname.trimmingCharacters(in: .whitespaces).isEmpty || (nameType == .nickname && nickname.isEmpty))
+            .disabled(!canVote)
             .padding(.top, 36)
         }
         .padding(.horizontal, 20)
@@ -97,7 +107,7 @@ struct SetNicknameSheet: View {
     }
     
     private var anonymousField: some View {
-        Text("익명1")
+        Text(Self.anonymousName)
             .typography(.h3Md14)
             .foregroundStyle(.gray900)
             .padding(12)
