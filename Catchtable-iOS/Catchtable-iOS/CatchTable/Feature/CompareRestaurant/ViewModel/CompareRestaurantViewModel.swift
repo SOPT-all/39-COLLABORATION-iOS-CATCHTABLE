@@ -61,7 +61,7 @@ final class CompareRestaurantViewModel {
     
     var buttonTitle: String {
         switch phase {
-        case .creating: "\(candidateIds.count)개 · 투표 링크 공유하기"
+        case .creating: "\(candidateIds.count)개 · 투표 생성하기"
         case .voting: selectedStoreId == nil ? "가고 싶은 매장을 투표해주세요" : "매장 선택 완료"
         }
     }
