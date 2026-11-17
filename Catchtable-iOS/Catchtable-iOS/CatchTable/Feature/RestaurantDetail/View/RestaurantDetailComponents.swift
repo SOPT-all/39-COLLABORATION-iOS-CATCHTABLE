@@ -58,6 +58,7 @@ struct RestaurantPhotoCarousel: View {
 
 struct RestaurantSummaryView: View {
     let detail: RestaurantDetail
+    let onPickTogether: () -> Void
 
     var body: some View {
         VStack(alignment: .leading, spacing: 4) {
@@ -69,7 +70,7 @@ struct RestaurantSummaryView: View {
 
                 Spacer(minLength: 8)
 
-                PickTogetherButton { }
+                PickTogetherButton(action: onPickTogether)
             }
 
             VStack(alignment: .leading, spacing: 0) {

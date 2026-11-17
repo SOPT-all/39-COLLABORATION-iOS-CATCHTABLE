@@ -13,6 +13,7 @@ struct RestaurantDetailView: View {
     @State private var isBookmarked = false
 
     @Environment(\.dismiss) private var dismiss
+    @Environment(AppRouter.self) private var router
 
     init(
         restaurantID: Int = 1,
@@ -104,8 +105,10 @@ struct RestaurantDetailView: View {
                 viewerCountText: detail.viewerCountText
             )
 
-            RestaurantSummaryView(detail: detail)
-                .padding(.horizontal, 20)
+            RestaurantSummaryView(detail: detail) {
+                router.push(.compareRestaurant)
+            }
+            .padding(.horizontal, 20)
 
             Rectangle()
                 .fill(Color.gray200)
