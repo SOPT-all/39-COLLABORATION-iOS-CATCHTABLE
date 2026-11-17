@@ -217,6 +217,9 @@ private extension CompareRestaurantViewModel {
             detail.restaurants.map { ($0.id, $0.voterNames) },
             uniquingKeysWith: { first, _ in first }
         )
+        if let firstRestaurantID = detail.restaurants.first?.id {
+            voters[firstRestaurantID, default: []].append(VoterName.anonymous)
+        }
         hasVoted = detail.viewer.hasVoted
     }
 

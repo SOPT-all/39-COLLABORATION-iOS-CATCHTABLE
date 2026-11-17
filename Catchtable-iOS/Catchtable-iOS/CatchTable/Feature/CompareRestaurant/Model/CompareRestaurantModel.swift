@@ -33,6 +33,10 @@ struct VoteDetail {
     }
 }
 
+enum VoterName {
+    static let anonymous = "익명1"
+}
+
 enum VoteStatus: String {
     case open = "OPEN"
     case closed = "CLOSED"

@@ -18,7 +18,6 @@ struct SetNicknameSheet: View {
     
     let onVote: (String) -> Void
     private let maxCount: Int = 12
-    private static let anonymousName = "익명1"
     private static let compactHeight: CGFloat = 316
     private static let expandedHeight: CGFloat = 372
 
@@ -82,7 +81,7 @@ struct SetNicknameSheet: View {
             }
             
             CatchTableButton(title: "이 이름으로 투표하기", variant: .filled) {
-                onVote(nameType == .anonymous ? Self.anonymousName : trimmedNickname)
+                onVote(nameType == .anonymous ? VoterName.anonymous : trimmedNickname)
             }
             .disabled(!canVote)
             .padding(.top, 36)
@@ -113,7 +112,7 @@ struct SetNicknameSheet: View {
     }
     
     private var anonymousField: some View {
-        Text(Self.anonymousName)
+        Text(VoterName.anonymous)
             .typography(.h3Md14)
             .foregroundStyle(.gray900)
             .padding(12)
