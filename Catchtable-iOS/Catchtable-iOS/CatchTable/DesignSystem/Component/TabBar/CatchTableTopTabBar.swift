@@ -52,6 +52,7 @@ struct CatchTableTopTabBar: View {
                 Text(tab.title)
                     .typography(.h3Md14)
                     .foregroundStyle(isSelected ? Color.gray900 : Color.gray500)
+                    .frame(height: 18)
 
                 Rectangle()
                     .fill(isSelected ? Color.gray600 : Color.clear)

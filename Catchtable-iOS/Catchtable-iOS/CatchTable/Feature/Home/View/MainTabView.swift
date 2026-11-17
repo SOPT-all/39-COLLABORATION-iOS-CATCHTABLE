@@ -11,17 +11,19 @@ struct MainTabView: View {
     @State private var selectedTab: MainTab = .home
     
     var body: some View {
-        ZStack(alignment: .bottom) {
+        VStack(spacing: 0) {
             TabView(selection: $selectedTab) {
-                // TODO: View 연동 필요
-                HomeView().tag(MainTab.home)
-                Text("Saved").tag(MainTab.saved)
-                Text("Nearby").tag(MainTab.nearby)
-                Text("Dining").tag(MainTab.dining)
-                Text("My").tag(MainTab.my)
+                Group {
+                    // TODO: View 연동 필요
+                    HomeView().tag(MainTab.home)
+                    Text("Saved").tag(MainTab.saved)
+                    Text("Nearby").tag(MainTab.nearby)
+                    Text("Dining").tag(MainTab.dining)
+                    Text("My").tag(MainTab.my)
+                }
+                .toolbar(.hidden, for: .tabBar)
             }
-            .toolbar(.hidden, for: .tabBar)
-            
+
             CatchTableTabBar(selectedTab: $selectedTab)
         }
         .toolbar(.hidden, for: .navigationBar)
