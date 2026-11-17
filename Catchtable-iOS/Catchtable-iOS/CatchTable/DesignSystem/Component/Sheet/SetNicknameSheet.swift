@@ -18,8 +18,23 @@ struct SetNicknameSheet: View {
     
     let onVote: (String) -> Void
     private let maxCount: Int = 12
+    private static let compactHeight: CGFloat = 316
+    private static let expandedHeight: CGFloat = 372
+
+    private var sheetHeight: CGFloat {
+        nameType == nil ? Self.compactHeight : Self.expandedHeight
+    }
     private var inputCount: Int { nickname.count }
     private var isCountFull: Bool { inputCount >= maxCount }
+    private var trimmedNickname: String { nickname.trimmingCharacters(in: .whitespaces) }
+
+    private var canVote: Bool {
+        switch nameType {
+        case .anonymous: true
+        case .nickname: !trimmedNickname.isEmpty
+        case nil: false
+        }
+    }
 
     private var countColor: Color {
         if inputCount == 0 { return .gray400 }
@@ -66,9 +81,9 @@ struct SetNicknameSheet: View {
             }
             
             CatchTableButton(title: "이 이름으로 투표하기", variant: .filled) {
-                onVote(nameType == .anonymous ? "익명1" : nickname)
+                onVote(nameType == .anonymous ? VoterName.anonymous : trimmedNickname)
             }
-            .disabled(nickname.trimmingCharacters(in: .whitespaces).isEmpty || (nameType == .nickname && nickname.isEmpty))
+            .disabled(!canVote)
             .padding(.top, 36)
         }
         .padding(.horizontal, 20)
@@ -80,7 +95,7 @@ struct SetNicknameSheet: View {
                 .frame(width: 50, height: 6)
                 .padding(.top, 13)
         }
-        .presentationDetents([.height(372)])
+        .presentationDetents([.height(sheetHeight)])
         .presentationDragIndicator(.hidden)
         .presentationCornerRadius(36)
         .presentationBackground(.white)
@@ -97,7 +112,7 @@ struct SetNicknameSheet: View {
     }
     
     private var anonymousField: some View {
-        Text("익명1")
+        Text(VoterName.anonymous)
             .typography(.h3Md14)
             .foregroundStyle(.gray900)
             .padding(12)

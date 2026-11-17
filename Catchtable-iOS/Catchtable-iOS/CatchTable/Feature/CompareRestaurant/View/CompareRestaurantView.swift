@@ -9,7 +9,9 @@ import SwiftUI
 
 struct CompareRestaurantView: View {
     @State private var viewModel: CompareRestaurantViewModel
-    
+
+    @Environment(AppRouter.self) private var router
+
     init(role: VoteRole, voteID: Int? = nil) {
         _viewModel = State(initialValue: CompareRestaurantViewModel(role: role, voteID: voteID))
     }
@@ -17,7 +19,7 @@ struct CompareRestaurantView: View {
     var body: some View {
         VStack(spacing: 0) {
             VoteHeader(
-                onBack: {},
+                onBack: { router.popToRoot() },
                 onEndVote: viewModel.isEndVoteButtonVisible ? { viewModel.endVote() } : nil,
                 onShare: viewModel.isShareButtonVisible ? {} : nil
             )
@@ -51,6 +53,7 @@ struct CompareRestaurantView: View {
                     .disabled(!viewModel.isButtonEnabled)
             }
         }
+        .toolbar(.hidden, for: .navigationBar)
         .sheet(isPresented: $viewModel.isSheetPresented, onDismiss: viewModel.sheetDismissed) {
             SetNicknameSheet(defaultNickname: viewModel.defaultNickname) { name in
                 viewModel.vote(name: name)
@@ -72,4 +75,5 @@ struct CompareRestaurantView: View {
 
 #Preview {
     CompareRestaurantView(role: .host)
+        .environment(AppRouter())
 }

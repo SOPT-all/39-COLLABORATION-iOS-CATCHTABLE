@@ -61,7 +61,7 @@ final class CompareRestaurantViewModel {
     
     var buttonTitle: String {
         switch phase {
-        case .creating: "\(candidateIds.count)개 · 투표 링크 공유하기"
+        case .creating: "\(candidateIds.count)개 · 투표 생성하기"
         case .voting: selectedStoreId == nil ? "가고 싶은 매장을 투표해주세요" : "매장 선택 완료"
         }
     }
@@ -217,6 +217,9 @@ private extension CompareRestaurantViewModel {
             detail.restaurants.map { ($0.id, $0.voterNames) },
             uniquingKeysWith: { first, _ in first }
         )
+        if let firstRestaurantID = detail.restaurants.first?.id {
+            voters[firstRestaurantID, default: []].append(VoterName.anonymous)
+        }
         hasVoted = detail.viewer.hasVoted
     }
 

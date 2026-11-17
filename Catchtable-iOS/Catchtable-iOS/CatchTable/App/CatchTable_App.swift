@@ -9,11 +9,14 @@ import SwiftUI
 
 @main
 struct CatchTableApp: App {
+    @State private var router = AppRouter()
+
     var body: some Scene {
         WindowGroup {
-            NavigationStack {
+            NavigationStack(path: $router.path) {
                 MainTabView()
             }
+            .environment(router)
         }
     }
 }

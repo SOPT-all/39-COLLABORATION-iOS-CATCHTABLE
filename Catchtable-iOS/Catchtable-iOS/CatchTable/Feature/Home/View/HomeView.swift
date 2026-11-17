@@ -12,6 +12,8 @@ struct HomeView: View {
     @State private var selectedTab: TopTab = .ranking
     @State private var selectedRecentStoreID: HomeRecentStore.ID?
 
+    @Environment(AppRouter.self) private var router
+
     init(service: any HomeServiceProtocol = HomeService()) {
         _viewModel = State(initialValue: HomeViewModel(service: service))
     }
@@ -33,9 +35,11 @@ struct HomeView: View {
             }
             .safeAreaInset(edge: .bottom, spacing: 0) {
                 if let activeVote = viewModel.activeVote {
-                    VoteFloatingBar(restaurantCount: activeVote.candidateCount) { }
-                        .padding(.horizontal, 20)
-                        .padding(.bottom, 20)
+                    VoteFloatingBar(restaurantCount: activeVote.candidateCount) {
+                        router.push(.compareRestaurant(voteID: activeVote.id))
+                    }
+                    .padding(.horizontal, 20)
+                    .padding(.bottom, 20)
                 }
             }
         }
