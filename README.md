@@ -41,6 +41,16 @@
 
 ---
 
+## 🍒 시연 영상
+
+| 홈 | 가게 상세 | 함께 고르기 |
+| :---: | :---: | :---: |
+| <video src="https://github.com/user-attachments/assets/99073ee0-2cfd-40d0-8f8f-157b70e164dd" controls width="100%"></video> | <video src="https://github.com/user-attachments/assets/cd3c4807-ff2a-4f22-a23d-5e109c3e0d68" controls width="100%"></video> | <video src="https://github.com/user-attachments/assets/b46e74ba-a429-4c2c-a986-5f6436e83472" controls width="100%"></video> |
+
+<br> <br>
+
+---
+
 <br> <br>
 ##  iOS Developer
 | 최주희 | 허다연 |
