@@ -8,11 +8,11 @@
 import SwiftUI
 
 private struct BottomSheetModifier<SheetContent: View>: ViewModifier {
+    @State private var dragOffset: CGFloat = 0
     @Binding var isPresented: Bool
+
     let onDismiss: () -> Void
     @ViewBuilder let sheetContent: () -> SheetContent
-
-    @State private var dragOffset: CGFloat = 0
 
     private let cornerRadius: CGFloat = 36
     private let dismissThreshold: CGFloat = 100
