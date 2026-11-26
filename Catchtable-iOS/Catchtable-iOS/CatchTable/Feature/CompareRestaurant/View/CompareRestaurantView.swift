@@ -54,7 +54,7 @@ struct CompareRestaurantView: View {
             }
         }
         .toolbar(.hidden, for: .navigationBar)
-        .sheet(isPresented: $viewModel.isSheetPresented, onDismiss: viewModel.sheetDismissed) {
+        .bottomSheet(isPresented: $viewModel.isSheetPresented, onDismiss: viewModel.sheetDismissed) {
             SetNicknameSheet(defaultNickname: viewModel.defaultNickname) { name in
                 viewModel.vote(name: name)
             }
