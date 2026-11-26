@@ -45,7 +45,7 @@ final class CompareRestaurantViewModel {
     var isCompletedPresented = false
     var isShareButtonVisible: Bool { phase == .voting }
     var isEndVoteButtonVisible: Bool {
-        guard phase == .voting else { return false }
+        guard phase == .voting, hasVoted else { return false }
         guard let voteDetail else { return role == .host }
         return voteDetail.viewer.isHost && voteDetail.isOpen
     }
