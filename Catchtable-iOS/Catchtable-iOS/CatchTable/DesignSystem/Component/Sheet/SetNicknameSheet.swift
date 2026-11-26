@@ -20,22 +20,32 @@ struct SetNicknameSheet: View {
     private let maxCount: Int = 12
     private static let compactHeight: CGFloat = 316
     private static let expandedHeight: CGFloat = 372
-
+    
     private var sheetHeight: CGFloat {
         nameType == nil ? Self.compactHeight : Self.expandedHeight
     }
     private var inputCount: Int { nickname.count }
     private var isCountFull: Bool { inputCount >= maxCount }
     private var trimmedNickname: String { nickname.trimmingCharacters(in: .whitespaces) }
-
+    
+    private var isallowedCharacters: Bool {
+        nickname.range(of: "^[가-힣ㄱ-ㅎㅏ-ㅣa-zA-Z0-9_ ]*$",
+                       options: .regularExpression
+        ) != nil
+    }
+    
+    private var isValidNickname: Bool {
+        !trimmedNickname.isEmpty && isallowedCharacters
+    }
+    
     private var canVote: Bool {
         switch nameType {
         case .anonymous: true
-        case .nickname: !trimmedNickname.isEmpty
+        case .nickname: isValidNickname
         case nil: false
         }
     }
-
+    
     private var countColor: Color {
         if inputCount == 0 { return .gray400 }
         return isCountFull ? .orangeBase : .gray900
