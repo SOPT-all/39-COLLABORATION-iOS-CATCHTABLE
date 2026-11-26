@@ -18,12 +18,6 @@ struct SetNicknameSheet: View {
     
     let onVote: (String) -> Void
     private let maxCount: Int = 12
-    private static let compactHeight: CGFloat = 316
-    private static let expandedHeight: CGFloat = 372
-    
-    private var sheetHeight: CGFloat {
-        nameType == nil ? Self.compactHeight : Self.expandedHeight
-    }
     private var inputCount: Int { nickname.count }
     private var isCountFull: Bool { inputCount >= maxCount }
     private var trimmedNickname: String { nickname.trimmingCharacters(in: .whitespaces) }
@@ -97,18 +91,13 @@ struct SetNicknameSheet: View {
             .padding(.top, 36)
         }
         .padding(.horizontal, 20)
-        .fixedSize(horizontal: false, vertical: true)
-        .frame(maxHeight: .infinity, alignment: .top)
+        .padding(.bottom, 22)
         .overlay(alignment: .top) {
             Capsule()
                 .fill(Color.gray200)
                 .frame(width: 50, height: 6)
                 .padding(.top, 13)
         }
-        .presentationDetents([.height(sheetHeight)])
-        .presentationDragIndicator(.hidden)
-        .presentationCornerRadius(36)
-        .presentationBackground(.white)
     }
     
     private func radioRow(title: String, isSelected: Bool, action: @escaping () -> Void) -> some View {
